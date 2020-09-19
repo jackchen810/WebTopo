@@ -141,6 +141,13 @@
           style="margin-left:100px;height:30px;margin-top:5px;"
           @click="getDataClick"
         />
+          <q-btn
+          label="首页"
+          color="primary"
+          size="xs"
+          style="margin-left:100px;height:30px;margin-top:5px;"
+          @click="ToHome"
+        />
       </div>
       <div style="position:absolute;right: 10px;top: 0px;" class="row">
         <div style="line-height:40px;height:40px;padding: 0px 5px;">缩放</div>
@@ -161,6 +168,17 @@
       <el-row :gutter="20">
         <el-col :span="12" :offset="6">
           <el-form label-width="100px">
+            <el-form-item label="展示用户名">
+            <el-upload
+                class="avatar-uploader"
+                :action="uploadUrl"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+              >
+                <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
             <el-form-item label="展示用户名">
               <el-input v-model="showname" :placeholder="shownamev"></el-input>
             </el-form-item>
@@ -213,7 +231,8 @@ export default {
     VueRulerTool,
     Topotable,
   },
-  props: [],
+ 
+   
   computed: {
     ...mapState({
       topoEditor: (state) => state.topoEditor.topoData,
@@ -288,7 +307,10 @@ export default {
       page_size:10,
       current_page:1,
       totalnum:0,
-     
+      uploadUrl: "api/project/manage/add",
+      imageUrl: "",
+       
+    
     };
   },
   methods: {
@@ -332,7 +354,6 @@ export default {
     },
     resizeMousedown(component, $event, index, flag) {
       //resize-鼠标按下事件
-
       this.flag = flag;
       this.curControl = component;
       this.curIndex = index;
@@ -679,7 +700,7 @@ export default {
       this.getData()
     },
     getData(page) {
-      let that = this;
+     let that = this;
     console.log(page);
       this.current_page = page ? page : this.current_page
       this.$axios
@@ -743,17 +764,39 @@ export default {
     },
     currentchange(){
 
-    }
+    },
+    ToHome(){
+      this.$router.push({
+         path:'/Home'
+      }
+       
+      )
+    },
+    handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+    
+
   },
   mounted() {
-    this.$axios.post("http://localhost:3000/api/user/add",{
-        username:"woshi",
-        password:"11222",
-        email:"ddddd"
-    }).then(res=>{
-      console.log(res)
-    })
+    console.log(typeof(dddvvv))
+    // this.$axios.post("http://localhost:3000/api/user/add",{
+    //     username:"woshi",
+    //     password:"11222",
+    //     email:"ddddd"
+    // }).then(res=>{
+    //   console.log(res)
+    // })
     
+    let that =this
+    if(this.$route.query.id){
+      this.$axios.post('/api/drag/listid',{
+        id : that.$route.query.id
+      }).then(res=>{
+        console.log(res.data.extra[0])
+        that.handleClick(res.data.extra[0])
+      })
+    }
     this.shownamev = localStorage.getItem("user_account");
     this.isname = this.topoDatademo;
     this.loadDefaultTopoData();
@@ -920,7 +963,29 @@ export default {
   .dialogcss .el-dialog__body{
      padding: 5px 20px 30px;
   }
-  
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
   
 }
 </style>

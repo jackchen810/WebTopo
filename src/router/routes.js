@@ -14,6 +14,7 @@ const routes = [
   },
   {
     path: '/TopoLayout',
+    name:'TopoLayout',
     component: () => import('layouts/TopoLayout.vue'),
     children: [
       {

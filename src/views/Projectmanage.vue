@@ -25,11 +25,11 @@
           <q-card-section class="q-pt-none">
             <!-- 发布
             运行编辑分享下架设置复制删除-->
-            <q-btn flat color="primary" label="发布" />
+            <q-btn flat color="primary" @click="Fullscreen(item)" label="发布" />
             <!-- <q-btn flat color="primary" label="运行" /> -->
-            <q-btn flat color="primary" label="编辑" />
-            <q-btn flat color="primary" label="设置" />
-            <q-btn flat color="primary" label="删除" />
+            <q-btn flat color="primary" @click="handleClick(item)" label="编辑" />
+            <q-btn flat color="primary" @click="setupClick(item)" label="设置" />
+            <q-btn flat color="primary" @click="delClick" label="删除" />
           </q-card-section>
         </q-card>
       </div>
@@ -42,16 +42,16 @@
         >
         </q-pagination>
       </div>-->
-        <CPagination :count="count" :emitEvent="emitEvent" @pageChange='pageChange' ></CPagination>
+      <CPagination :count="count" :emitEvent="emitEvent" @pageChange="pageChange"></CPagination>
     </div>
   </div>
 </template>
 <script>
-import CPagination from "./pagination"
+import CPagination from "./pagination";
 export default {
   name: "Projectmanage",
-  components:{
-    CPagination
+  components: {
+    CPagination,
   },
   data() {
     return {
@@ -60,7 +60,7 @@ export default {
       current_page: 1,
       count: 0,
       max: 4,
-      emitEvent:false,
+      emitEvent: false,
     };
   },
   mounted: function () {
@@ -72,12 +72,11 @@ export default {
       this.$router.push("/TopoLayout");
     },
     pageChange(limit, offset) {
-        
       let that = this;
-      console.log(limit+'===='+offset);
-      offset = offset==0?offset+1: offset/10+1;
+      console.log(limit + "====" + offset);
+      offset = offset == 0 ? offset + 1 : offset / 10 + 1;
       this.$axios
-      
+
         .post("/api/drag/list", {
           username: localStorage.getItem("user_account"),
           page_size: limit,
@@ -90,17 +89,35 @@ export default {
           //   //  this.gettopoEditor(Jsondata)
           that.componentdata = res.data.extra;
           this.count = res.data.total;
-        // this.emitEvent = !this.temitEventrue;
+          // this.emitEvent = !this.temitEventrue;
           //  that.configData = Jsondata
         });
       // this.this.configData =
-
-      
     },
     getpaginationtal(val) {
-    //   this.getData(val);
-    
+      //   this.getData(val);
     },
+    handleClick(val) {
+      this.$router.push({
+        path: "/TopoLayout",
+        query: {
+          id: val._id,
+        },
+      });
+    },
+    Fullscreen(val) {
+           localStorage.setItem('topoData',val.dargjsondata)
+      let routeData = this.$router.resolve({
+        path: "/Fullscreen",
+        query: { id: val._id },
+      });
+      window.open(routeData.href, "_blank");
+    },
+    setupClick(val) {
+        console.log(val);
+        localStorage.setItem('topoData',val,dargjsondata)
+    },
+    delClick() {},
   },
 };
 </script>
@@ -109,5 +126,8 @@ export default {
   width: 100%;
   max-width: 240px;
 }
-.text-h6{ font-size:1rem}
+
+.text-h6 {
+  font-size: 1rem;
+}
 </style>

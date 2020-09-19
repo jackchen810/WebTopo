@@ -2,11 +2,11 @@
 <div class="topo-editor">
     <WresizePanel3 class="full-height">
         <template v-slot:left>
-            <TopoToolbox ref="topoToolbox" class="topo-toolbox" />
+            <TopoToolbox ref="topoToolbox" class="topo-toolbox"  />
         </template>
 
         <template v-slot:center>
-            <TopoMain ref="topoMain" class="topo-main" />
+            <TopoMain ref="topoMain" class="topo-main"  />
         </template>
 
         <template v-slot:right>

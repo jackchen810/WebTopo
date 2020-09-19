@@ -10,6 +10,7 @@ import TopoRender from '@/components/topo/TopoRender';
 
 export default {
     name: 'TopoFullscreen',
+    props:['id'],
     components: {
         TopoRender
     },
@@ -20,7 +21,7 @@ export default {
 
     },
     mounted() {
-
+        console.log(this.$route.params.id, this.id)
     }
 }
 </script>

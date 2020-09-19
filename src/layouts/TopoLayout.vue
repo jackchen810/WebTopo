@@ -1,9 +1,18 @@
 <template>
-<router-view />
+    <router-view />
 </template>
 
 <script>
 export default {
-    name: 'TopoLayout'
+    name: 'TopoLayout',
+    data(){
+        return{
+            routeid:''
+        }
+    },
+    mounted:function(){
+       
+        
+    }
 }
 </script>
