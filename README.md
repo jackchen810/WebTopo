@@ -129,3 +129,5 @@ $ quasar dev -m electron
 
 ## 运行截图
 ![avatar](/doc/shot.png)
+
+## 修改
