@@ -25,6 +25,7 @@ export default {
             }
         },
         lineHeight: function() {
+         
             if(this.detail.style.lineHeight == undefined) {
                 return this.detail.style.position.h;
             }
@@ -37,12 +38,17 @@ export default {
         }
     },
     methods: {
+        
         refreshData(val,sceneName) {
 
         },
         onResize() {
 
         },        
+    },
+    mounted:function(){
+    
     }
+    
 }
 </script>

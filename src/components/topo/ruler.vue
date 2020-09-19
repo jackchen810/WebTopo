@@ -1,5 +1,6 @@
 <template>
   <div v-show="rulerToggle" id="rulerTool" :style="{width : windowWidth + 'px',height : windowHeight + 'px',position:position}" class="ScaleBox" onselectstart="return false;">
+   
     <div id="levelRuler" class="ScaleRuler_h" @mousedown.stop="levelDragRuler">
       <span v-for="(item,index) in xScale" :key="index" :style="{left:index * 50 + 2 + 'px'}" class="n">{{ item.id }}</span>
     </div>

@@ -5,7 +5,7 @@
       <div class="q-pa-md">
                 <div class="text-h4">
                     金大万翔物联网管理平台
-                    <q-badge align="top">cli v1.1.0</q-badge>
+                    <q-badge align="top">cli v1.0.0</q-badge>
              </div>
        
         <div class="q-gutter-md" style="max-width: 300px">
@@ -113,7 +113,7 @@ export default {
             //localStorage.setItem('ms_username', self.ruleForm.username);
             if (user_type == 0) {
                 
-              self.$router.push("/TopoLayout");
+              self.$router.push("/Home");
             } else {
               self.$router.push("/");
             }

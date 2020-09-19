@@ -59,14 +59,12 @@ export default {
         },
         updateView() {
             this.setOption(this.option);
-        },        
+        }
     },
     mounted() {
-        if(this.editMode) {
-            this.$nextTick(function(){
-                this.setOption(this.option);
-            });
-        }
+        this.$nextTick(function(){
+            this.setOption(this.option);
+        });
     }
 }
 </script>

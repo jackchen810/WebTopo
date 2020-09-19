@@ -1,7 +1,19 @@
-
+import Login from '../views/Login.vue'
+import Home from '../views/Home.vue'
+import Fullscreen from '../pages/topo/Fullscreen'
 const routes = [
   {
     path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/Home',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/TopoLayout',
     component: () => import('layouts/TopoLayout.vue'),
     children: [
       {
@@ -10,8 +22,13 @@ const routes = [
     ]
   },
   {
-    path: '/fullscreen', name: 'TopoFullscreen',component: () => import('pages/topo/Fullscreen.vue')
-  }
+    path: '/Fullscreen',
+    name: 'Fullscreen',
+    component: Fullscreen
+  },
+  // {
+  //   path: '/fullscreen', name: 'TopoFullscreen',component: () => import('pages/topo/Fullscreen.vue')
+  // }
 ]
 
 // Always leave this as last one

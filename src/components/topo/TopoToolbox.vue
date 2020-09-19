@@ -48,6 +48,8 @@ export default {
     },
     methods: {
         onDragstart(event, info) {
+            console.log('onDragstart')
+            console.log(info)
             var infoJson = JSON.stringify(info.info);
             event.dataTransfer.setData('my-info', infoJson);
         },
@@ -58,7 +60,7 @@ export default {
         this.toolbox.push(jsonChart);
         this.toolbox.push(jsonOffice);
         this.toolbox.push(jsonSvg);      
-        //this.toolbox.push(jsonSvgDianli);        
+        // this.toolbox.push(jsonSvgDianli);        
     }
 }
 </script>

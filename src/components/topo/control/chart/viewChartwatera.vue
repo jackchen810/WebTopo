@@ -6,7 +6,7 @@
 // import echarts from "echarts";
 import BaseView from "../View";
 import echarts from "echarts/lib/echarts"
-// import 'echarts-liquidfill'
+import 'echarts-liquidfill'
 export default {
   name: "viewChartwatera",
   extends: BaseView,

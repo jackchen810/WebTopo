@@ -2,7 +2,36 @@
     "title": "SVG控件",
     "icon": "payment",
     "opened": false,
-    "items": [{
+
+    "items": [
+        {
+            "text": "开关",
+            "icon": "statics/topo/svg/switch1.png",
+            "info": {
+                "type": "buttom",
+                "action": [],
+                "dataBind": {
+                    "sn": "",
+                    "title": "",
+                    "biz": "",
+                    "queryParam": {
+                        "isclick":true
+                    }
+                },
+                "style": {
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "w": 100,
+                        "h": 100
+                    },
+                    "backColor": "transparent",
+                    "zIndex": 1,
+                    "url": "statics/topo/svg/on1.svg"
+                }
+            }
+        },
+        {
         "text": "矩形",
         "icon": "stop",
         "isFontIcon": true,
@@ -52,7 +81,60 @@
                 "url": "statics/topo/svg/demo1.svg"
             }
         }
-    },{
+    },
+    {
+        "text": "on",
+        "icon": "stop",
+        "isFontIcon": true,
+        "info": {
+            "type": "svg-image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 200,
+                    "h": 200
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/on1.svg"
+            }
+        }
+    },
+    {
+        "text": "off",
+        "icon": "statics/topo/office/g03.svg",
+        "isFontIcon": true,
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 40,
+                    "h": 40
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/off1.svg"
+            }
+        }
+    },
+    {
         "text": "载入框1",
         "icon": "stop",
         "isFontIcon": true,

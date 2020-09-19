@@ -1,12 +1,13 @@
+
 // Configuration for your app
-const path = require('path');
-function rootPath(dir) {
+const path = require('path')
+function rootPath (dir) {
   return path.join(__dirname, '.', dir)
 }
 
 const APP_INFO = {
-  NAME: "WebTopo",
-  PKG_NAME: "WebTopo"
+  NAME: 'wode',
+  PKG_NAME: 'wode'
 }
 
 module.exports = function (ctx) {
@@ -16,16 +17,18 @@ module.exports = function (ctx) {
       'i18n',
       'axios',
       'x2js',
-      'EventBus'
+      'EventBus',
+      'config'
     ],
     css: [
       'app.styl'
     ],
     extras: [
-      'material-icons' // optional, you are not bound to it
+      'material-icons', // optional, you are not bound to it
       // 'ionicons',
       // 'mdi',
       // 'fontawesome'
+      'roboto-font' // optional, you are not bound to it
     ],
     supportIE: true,
     build: {
@@ -35,36 +38,36 @@ module.exports = function (ctx) {
       },
       scopeHoisting: true,
       vueRouterMode: 'history',
-      //publicPath: "/WebTopo",
-      publicPath: '/WebTopo/dist/spa/', //注意：这里请根据实际情况部署
+      // publicPath: "/WebTopo",
+      publicPath: '/', // 注意：这里请根据实际情况部署
       vueCompiler: true,
       gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack(cfg) {
+      extendWebpack (cfg) {
         cfg.resolve.alias = {
           ...cfg.resolve.alias,
-          "@": rootPath("src")
+          '@': rootPath('src')
         }
       }
     },
     devServer: {
       // https: true,
-      port: 8888,
+      port: 9090,
       open: true, // opens browser window automatically
-      proxy: {        
+      proxy: {
+        // 设置代理
         '/api': {
-          target: 'http://xxxxxx:8080/api',  // 接口域名
-          secure: false,  // 如果是https接口，需要配置这个参数
-          changeOrigin: true,  //是否跨域
+          // 8000 是后端地址端口，local运行时前端使用8001，后端使用8000 端口
+          target: 'http://localhost', // 接口域名
+          changeOrigin: true, // 是否跨域
+          autoOpenBrowser: true,
+          assetsSubDirectory: 'static',
+          assetsPublicPath: '/',
           pathRewrite: {
-            '^/api': ''
+            '^/api': '/api' // 需要api
           }
-        },
-        '/open/api/weather': {
-          target: 'http://www.sojson.com/',
-          changeOrigin: true
-        }        
+        }
       }
     },
     // framework: 'all' --- includes everything; for dev only!
@@ -88,7 +91,25 @@ module.exports = function (ctx) {
         'QInput',
         'QColor',
         'QSlider',
-        'QPopupProxy'
+        'QPopupProxy',
+        'QForm',
+        'QBadge',
+        'QDialog',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
+        'QAvatar',
+        'QFooter',
+        'QScrollArea',
+        'QSeparator',
+        'QBreadcrumbs',
+        'QBreadcrumbsEl',
+        'QImg',
+        'QPagination'
       ],
       directives: [
         'Ripple',

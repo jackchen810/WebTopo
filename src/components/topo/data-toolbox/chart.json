@@ -2,7 +2,8 @@
   "title": "图表",
   "icon": "insert_chart",
   "opened": false,
-  "items": [{
+  "items": [
+    {
       "text": "line",
       "icon": "show_chart",
       "isFontIcon": true,
@@ -123,6 +124,56 @@
             "h": 300
           },
           "backColor": "white",
+          "zIndex": 1
+        }
+      }
+    },
+    {
+      "text": "lines",
+      "icon": "av_timer",
+      "isFontIcon": true,
+      "info": {
+        "type": "chart-lines",
+        "action": [],
+        "dataBind": {
+          "sn": "",
+          "title": "",
+          "biz": "",
+          "queryParam": {}
+        },
+        "style": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "w": 300,
+            "h": 300
+          },
+          "backColor": " ",
+          "zIndex": 1
+        }
+      }
+    },
+    {
+      "text": "watera",
+      "icon": "av_timer",
+      "isFontIcon": true,
+      "info": {
+        "type": "chart-watera",
+        "action": [],
+        "dataBind": {
+          "sn": "",
+          "title": "",
+          "biz": "",
+          "queryParam": {}
+        },
+        "style": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "w": 300,
+            "h": 300
+          },
+          "backColor": " ",
           "zIndex": 1
         }
       }

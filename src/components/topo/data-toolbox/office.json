@@ -1,10 +1,11 @@
 {
-    "title": "办公室",
+    "title": "图片",
     "icon": "home",
     "opened": false,
-    "items": [{
-        "text": "花盘",
-        "icon": "statics/topo/office/embellish1.png",
+    "items": [
+    {
+        "text": "",
+        "icon": "statics/topo/office/index (9).svg",
         "info": {
             "type": "image",
             "action": [],
@@ -23,12 +24,13 @@
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/embellish1.png"
+                "url": "statics/topo/office/index (9).svg"
             }
         }
-    }, {
-        "text": "椅子",
-        "icon": "statics/topo/office/chair1.png",
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/g73.svg",
         "info": {
             "type": "image",
             "action": [],
@@ -42,17 +44,18 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 205,
-                    "h": 115
+                    "w": 42,
+                    "h": 42
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/chair1.png"
+                "url": "statics/topo/office/g73.svg"
             }
         }
-    }, {
-        "text": "办公桌",
-        "icon": "statics/topo/office/desk1.png",
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/g01.svg",
         "info": {
             "type": "image",
             "action": [],
@@ -66,17 +69,18 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 305,
-                    "h": 157
+                    "w": 42,
+                    "h": 42
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/desk1.png"
+                "url": "statics/topo/office/g01.svg"
             }
         }
-    }, {
-        "text": "办公桌",
-        "icon": "statics/topo/office/desk2.png",
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/g02.svg",
         "info": {
             "type": "image",
             "action": [],
@@ -90,17 +94,18 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 148,
-                    "h": 107
+                    "w": 42,
+                    "h": 42
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/desk2.png"
+                "url": "statics/topo/office/g02.svg"
             }
         }
-    }, {
-        "text": "办公桌",
-        "icon": "statics/topo/office/desk3.png",
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/g03.svg",
         "info": {
             "type": "image",
             "action": [],
@@ -114,17 +119,19 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 162,
-                    "h": 232
+                    "w": 42,
+                    "h": 42
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/desk3.png"
+                "url": "statics/topo/office/g03.svg"
             }
         }
-    }, {
-        "text": "室内布局",
-        "icon": "statics/topo/office/wall1.png",
+    }
+    ,
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190701182101_368.png",
         "info": {
             "type": "image",
             "action": [],
@@ -138,17 +145,19 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 726,
-                    "h": 855
+                    "w": 142,
+                    "h": 212
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/wall1.png"
+                "url": "statics/topo/office/20190701182101_368.png"
             }
         }
-    }, {
-        "text": "柜子",
-        "icon": "statics/topo/office/cabinet1.png",
+    }
+    ,
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190702170803_715.png",
         "info": {
             "type": "image",
             "action": [],
@@ -162,17 +171,18 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 41,
-                    "h": 128
+                    "w": 142,
+                    "h": 212
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/cabinet1.png"
+                "url": "statics/topo/office/20190702170803_715.png"
             }
         }
-    }, {
-        "text": "柜子",
-        "icon": "statics/topo/office/cabinet2.png",
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190701181428_161.png",
         "info": {
             "type": "image",
             "action": [],
@@ -186,13 +196,114 @@
                 "position": {
                     "x": 0,
                     "y": 0,
-                    "w": 89,
-                    "h": 89
+                    "w": 142,
+                    "h": 212
                 },
                 "backColor": "transparent",
                 "zIndex": 1,
-                "url": "statics/topo/office/cabinet2.png"
+                "url": "statics/topo/office/20190701181428_161.png"
             }
         }
-    }]
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190701181354_914.png",
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 142,
+                    "h": 212
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/office/20190701181354_914.png"
+            }
+        }
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/GD.svg",
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 142,
+                    "h": 212
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/office/GD.svg"
+            }
+        }
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190701181434_604.png",
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 142,
+                    "h": 112
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/office/20190701181434_604.png"
+            }
+        }
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/office/20190701182105_431.png",
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 142,
+                    "h": 112
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/office/20190701182105_431.png"
+            }
+        }
+    }
+]
 }

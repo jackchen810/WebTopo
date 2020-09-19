@@ -28,9 +28,12 @@ export const execute = function(state,command) {
             component.style.borderStyle = component.style.borderStyle? component.style.borderStyle : 'solid';
             component.style.borderColor = component.style.borderColor? component.style.borderColor : '#ccccccff';            
             //component.style.fontFamily = "Arial";
-            state.topoData.components.push(component);            
+            state.topoData.components.push(component); 
+    
+               
             break;
         case 'del':
+            console.log(command.index);
             var keys = [];
             for(var i = 0; i < state.topoData.components.length; i++) {
                 var identifier = state.topoData.components[i].identifier;
@@ -66,7 +69,8 @@ export const execute = function(state,command) {
                 component.style.position.x = component.style.position.x + 25 * (state.copyCount + 1);
                 component.style.position.y = component.style.position.y + 25 * (state.copyCount + 1);
                 state.topoData.components.push(component);
-                this.commit('topoEditor/addSelectedComponent', component);     
+                this.commit('topoEditor/addSelectedComponent', component);   
+                  
                 this.commit('topoEditor/increaseCopyCount');                
             }
             break;
@@ -79,6 +83,7 @@ export const execute = function(state,command) {
 }
 
 export const undo = (state) => {
+    console.log("undo") 
     var command = state.undoStack.pop();
     if(command == undefined) {
         console.log("none undo command.");
@@ -118,6 +123,7 @@ export const undo = (state) => {
 }
 
 export const redo = function(state) {
+    console.log("redo") 
     var command = state.redoStack.pop();
     if(command == undefined) {
         console.log("none redo command.");
@@ -132,7 +138,8 @@ export const redo = function(state) {
  * @param {*} state 
  * @param {*} component 
  */
-export const setSelectedComponent = (state,component) => {    
+export const setSelectedComponent = (state,component) => {   
+    console.log(state) 
     var fuid = uid;
     if(!component.identifier) {
         component.identifier = fuid();
@@ -140,7 +147,7 @@ export const setSelectedComponent = (state,component) => {
     state.selectedComponents = [component.identifier];
     state.selectedComponentMap = {};
     Vue.set(state.selectedComponentMap,component.identifier,component);
-    Vue.set(state,'selectedComponent',component);    
+    Vue.set(state,'selectedComponent',component);  //渲染2
 };
 
 /**
@@ -149,6 +156,7 @@ export const setSelectedComponent = (state,component) => {
  * @param {*} component 
  */
 export const addSelectedComponent = (state,component) => {
+    console.log("addSelectedComponent")
     var fuid = uid;
     if(!component.identifier) {
         component.identifier = fuid();
@@ -208,6 +216,7 @@ export const clearSelectedComponent = (state) => {
 }
 
 export const setLayerSelected = (state,selected) => {
+    
     state.selectedIsLayer = selected;
 }
 
@@ -218,3 +227,31 @@ export const setCopySrcItems = (state,items) => {
 export const increaseCopyCount = (state) => {
     state.copyCount++;
 }
+export const setdemo = (state,itemsv) =>{
+    state.selectedComponentMapdemo = itemsv
+}
+
+
+export const gettopoEditor = (state,itemsv) =>{
+    state.topoData = itemsv
+    // console.log(state) 
+}
+
+export const gettopoDataname = (state,itemsv) =>{
+    state.topoData.name = itemsv
+    // console.log(state)
+   
+}
+
+
+export const buttomupdata = (state,itemsve) => {
+    console.log(state)
+    state.topoData.components.map((item,i) =>{
+        if( item.identifier == itemsve.identifier){
+            state.topoData.components[i].style.url = itemsve.url
+            state.topoData.components[i].dataBind.queryParam.isclick = itemsve.isclick
+        } 
+    }) 
+    // command.style.url = itemsv.url
+    // command.dataBind.queryParam.isclick = itemsv.isclick
+ }

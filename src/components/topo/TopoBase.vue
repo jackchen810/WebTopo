@@ -3,6 +3,7 @@
 <script>
 import ViewText from './control/ViewText';
 import ViewImage from './control/ViewImage';
+import ViewButtom from './control/ViewButtom';
 
 import ViewCircular from './control/canvas/ViewCircular';
 import ViewLine from './control/canvas/ViewLine';
@@ -13,8 +14,11 @@ import ViewRect from './control/canvas/ViewRect';
 import ViewTriangle from './control/canvas/ViewTriangle';
 
 import ViewChart from './control/chart/ViewChart';
-import ViewChartPie from './control/chart/ViewChartPie';
 import ViewChartGauge from './control/chart/ViewChartGauge';
+import ViewChartLines from './control/chart/ViewChartLines';
+import viewChartwatera from './control/chart/viewChartwatera';
+import ViewChartPie from './control/chart/ViewChartPie';
+
 
 import ViewSvgImage from './control/svg/ViewSvgImage';
 import ViewSvgStatic from './control/svg/ViewSvgStatic';
@@ -24,6 +28,7 @@ export default {
     components: {
         ViewText,
         ViewImage,
+        ViewButtom,
         ViewCircular,
         ViewLine,
         ViewLineArrow,
@@ -32,10 +37,12 @@ export default {
         ViewRect,
         ViewTriangle,
         ViewChart,
+        ViewChartLines,
         ViewChartPie,
         ViewChartGauge,
         ViewSvgImage,
-        ViewSvgStatic        
+        ViewSvgStatic,
+        viewChartwatera
     },
 }
 </script>

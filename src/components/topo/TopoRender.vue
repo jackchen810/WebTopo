@@ -6,7 +6,7 @@
                     @click="doClickComponent(component)"
                     @dblclick="doDbClickComponent(component)"
                     :class="{'topo-render-wrapper-clickable': component.action.length > 0 }"
-                    v-show="component.style.visible == undefined? true:component.style.visible"
+                    v-show="component.style.visible == true? true:component.style.visible.value"
                     :style="{
                         left: component.style.position.x + 'px',
                         top: component.style.position.y + 'px',
@@ -29,7 +29,7 @@
 import TopoBase from './TopoBase';
 
 import topoUtil from './util/topo-util';
-
+import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 export default {
     name: 'TopoRender',
     extends: TopoBase,
@@ -37,6 +37,11 @@ export default {
         
     },
     computed: {
+        ...mapState(
+            {
+                 topoData: (state) => state.topoEditor.topoData,
+            }
+        ),
         layerStyle:function () {
             var styles = [];
             if(this.configData.layer.backColor) {
@@ -60,13 +65,29 @@ export default {
             configData: {
                 
             },
+             buttomdata:{
+                 isclick : true,
+                 identifier:'',
+                 url:''
+            },
         }
     },
     methods: {
+        ...mapMutations('topoEditor',[
+            'buttomupdata'
+        ]),
         parseView(component) {
             return topoUtil.parseViewName(component);
         },
-        doClickComponent(component){         
+        doClickComponent(component){   
+            
+            if(component.type == 'buttom'){
+                this.buttomdata.identifier = component.identifier
+                  this.buttomdata.url = (this.buttomdata.isclick !==true)?'statics/topo/svg/on1.svg':'statics/topo/svg/off1.svg'
+                    this.buttomupdata(this.buttomdata)
+                    this.buttomdata.isclick = !this.buttomdata.isclick
+            }
+            
             for(var i = 0; i < component.action.length; i++) {
                 var action = component.action[i];                
                 if(action.type == 'click') {  
@@ -82,6 +103,7 @@ export default {
                 }
             }
         },
+        //显示隐藏
         handleComponentActuib(action){
             var _this = this;
             if(action.action == 'visible'){
@@ -95,7 +117,8 @@ export default {
                         _this.showComponent(identifier,false);
                     });
                 }
-            } else if(action.action == 'service') {                        
+                	
+            } else if(action.action == 'Invisible') {                        
                 _this.sendFun(action);
             } 
         },
@@ -110,11 +133,31 @@ export default {
                 }
             }
         },
+         getData(){
+
+            let that = this
+             this.$axios.post(
+               '/api/drag/list',
+               {
+                   username:localStorage.getItem('user_account'),
+                }
+           ).then(res =>{
+               console.log(typeof(res.data.extra[0].dargjsondata));
+               var Jsondata = JSON.parse(res.data.extra[0].dargjsondata)
+                 console.log(Jsondata);
+               that.configData = Jsondata
+           })
+            // this.this.configData = 
+        }  
     },
-    mounted() {    
+    mounted() {
+        // this.getData()
         //这里只是纯前端项目，实际应该从后台拿取数据    
         var temp = localStorage.getItem('topoData');
+        // console.log(temp)
         this.configData = JSON.parse(temp);
+        // console.log( this.configData)
+        
     }
 }
 </script>

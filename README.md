@@ -102,6 +102,8 @@ github预览访问如下地址：https://phynos.github.io/WebTopo/dist/spa
 - 安装NodeJs
 - 安装vue-cli：npm install -g @vue/cli
 - 安装quasar-cli：npm install -g @quasar/cli
+- 安装npm install echarts-liquidfill
+- 安装 npm install --save element-ui
 - 进入根目录，执行安装npm install（建议使用cnpm安装）  
 - 启动项目：quasar dev  
 
