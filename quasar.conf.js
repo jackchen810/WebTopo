@@ -1,6 +1,8 @@
 
 // Configuration for your app
 const path = require('path')
+
+
 function rootPath (dir) {
   return path.join(__dirname, '.', dir)
 }
@@ -109,7 +111,11 @@ module.exports = function (ctx) {
         'QBreadcrumbs',
         'QBreadcrumbsEl',
         'QImg',
-        'QPagination'
+        'QPagination',
+        'QUploader',
+        'QChip',
+        'QSpace',
+        'QField'
       ],
       directives: [
         'Ripple',

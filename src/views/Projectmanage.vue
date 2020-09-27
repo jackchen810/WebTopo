@@ -10,7 +10,7 @@
       <div class="q-pa-md row items-start q-gutter-md">
         <q-card class="my-card" v-for="(item,index) in componentdata" :key="index">
           <q-img
-            src="https://cdn.quasar.dev/img/non-existent-image-src.png"
+            :src="item.project_image"
             style="height: 140px; max-width: 100%"
           >
             <template v-slot:error>
@@ -18,10 +18,10 @@
             </template>
           </q-img>
           <q-card-section>
-            <div class="text-h6">项目名:{{item.projectname.substring(0,5)}}</div>
-            <div class="text-subtitle2">创建人：{{item.username}}</div>
+            <div class="text-h6">项目名:{{item.projectname.substring(0,11)}}</div>
+            <div class="text-subtitle2">创建人：{{item.user_account}} </div>
+              <div class="text-subtitle2">展示用户：{{item.project_showname}}</div>
           </q-card-section>
-
           <q-card-section class="q-pt-none">
             <!-- 发布
             运行编辑分享下架设置复制删除-->
@@ -29,42 +29,65 @@
             <!-- <q-btn flat color="primary" label="运行" /> -->
             <q-btn flat color="primary" @click="handleClick(item)" label="编辑" />
             <q-btn flat color="primary" @click="setupClick(item)" label="设置" />
-            <q-btn flat color="primary" @click="delClick" label="删除" />
+            <q-btn flat color="primary" @click="delClick(item)" label="删除" />
           </q-card-section>
         </q-card>
       </div>
-      <!-- <div class="q-pa-lg flex flex-center">
-        <q-pagination
-        v-model="totalnum"
-        :max="max"
-        :max-pages="1"
-        @input="getpaginationtal"
-        >
-        </q-pagination>
-      </div>-->
-      <CPagination :count="count" :emitEvent="emitEvent" @pageChange="pageChange"></CPagination>
+      
+      <CPagination :count="count" :emitEvent="emitEvent" @pageChange="pageChange"  ></CPagination>
     </div>
+    
+     <el-dialog
+        title="设置"
+        :visible.sync="isSetup"
+        width="20%"
+        center>
+
+          <Setproject :userDatalist = "userDatalist" :userUrl = "userUrl"  :componentdata-val = "componentdataVal" @closedialog = "closedialog"></Setproject>
+   
+    </el-dialog>
+
   </div>
 </template>
 <script>
+import { mapState, mapMutations, mapAction } from "vuex";
 import CPagination from "./pagination";
+import httpurl from '../assets/libs/httpurl'
+import Setproject from './Setproject'
 export default {
   name: "Projectmanage",
   components: {
     CPagination,
+    Setproject
   },
+  computed: {
+      ...mapState({
+       userDatalist: (state) => state.example.userDatalist,
+    }),
+   },
+ 
   data() {
     return {
-      componentdata: [],
+      componentdata: [], // dargjson 表数据
       page_size: 10,
       current_page: 1,
       count: 0,
       max: 4,
       emitEvent: false,
+      isSetup:false, // 设置框
+      model:'',
+      userUrl:'',
+      componentdataVal:{}
+      
+
+   
+     
     };
   },
   mounted: function () {
     this.max = Math.ceil(this.count / this.page_size);
+   
+  
     // this.pageChange();
   },
   methods: {
@@ -73,25 +96,23 @@ export default {
     },
     pageChange(limit, offset) {
       let that = this;
+      this.page_size = limit
+      this.current_page = offset
       console.log(limit + "====" + offset);
       offset = offset == 0 ? offset + 1 : offset / 10 + 1;
-      this.$axios
-
+   
+        this.$axios
         .post("/api/drag/list", {
-          username: localStorage.getItem("user_account"),
+          user_account: localStorage.getItem("user_account"),
           page_size: limit,
           current_page: offset,
         })
         .then((res) => {
-          console.log(res.data.extra);
-          //  var Jsondata = JSON.parse(res.data.extra[0].dargjsondata)
-          //    console.log(Jsondata.components);
-          //   //  this.gettopoEditor(Jsondata)
           that.componentdata = res.data.extra;
           this.count = res.data.total;
-          // this.emitEvent = !this.temitEventrue;
-          //  that.configData = Jsondata
         });
+      
+      
       // this.this.configData =
     },
     getpaginationtal(val) {
@@ -114,14 +135,47 @@ export default {
       window.open(routeData.href, "_blank");
     },
     setupClick(val) {
-        console.log(val);
-        localStorage.setItem('topoData',val,dargjsondata)
+        this.userUrl = httpurl+'/Fullscreenpage?id='+val._id
+         console.log(this.userUrl);
+         this.componentdataVal = val
+         this.isSetup= true
     },
-    delClick() {},
+    async delClick(row) {
+      console.log(row._id);
+      let that = this;
+      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          that.$axios
+            .post("/api/drag/del", {
+              id: row._id,
+            })
+            .then((res) => {
+              that.pageChange(that.page_size,that.current_page)
+              this.$message({
+                type: "success",
+                message: "删除成功!",
+              });
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
+    closedialog(){
+      this.isSetup= false
+      this.pageChange(this.page_size,this.current_page)
+    }
   },
 };
 </script>
-<style lang="stylus" scoped>
+<style  scoped>
 .my-card {
   width: 100%;
   max-width: 240px;
@@ -130,4 +184,5 @@ export default {
 .text-h6 {
   font-size: 1rem;
 }
+.q-select{ width:200px}
 </style>

@@ -3,13 +3,13 @@
     <vue-ruler-tool
       :parent="true"
       :is-scale-revise="true"
-      style="width:100%;height: calc(100% - 40px);"
+      style="width: 100%; height: calc(100% - 40px)"
     >
       <div
         tabindex="0"
         id="surface-edit-layer"
         class="topo-layer"
-        :class="{'topo-layer-view-selected': selectedIsLayer}"
+        :class="{ 'topo-layer-view-selected': selectedIsLayer }"
         :style="layerStyle"
         @click="onLayerClick($event)"
         @mouseup="onLayerMouseup($event)"
@@ -23,14 +23,19 @@
         @keydown.ctrl.90.stop="undo"
         @keydown.ctrl.89.stop="redo"
       >
-        <template v-for="(component,index) in configData.components">
+        <template v-for="(component, index) in configData.components">
           <div
             :key="component.identifier"
             tabindex="0"
             class="topo-layer-view"
-            :class="{'topo-layer-view-selected': selectedComponentMap[component.identifier] == undefined? false:true }"
-            @click.stop="clickComponent(index,component,$event)"
-            @mousedown.stop="controlMousedown(component,$event,index)"
+            :class="{
+              'topo-layer-view-selected':
+                selectedComponentMap[component.identifier] == undefined
+                  ? false
+                  : true,
+            }"
+            @click.stop="clickComponent(index, component, $event)"
+            @mousedown.stop="controlMousedown(component, $event, index)"
             @keyup.delete="removeItem()"
             @keydown.up.exact.prevent="moveItems('up')"
             @keydown.right.exact.prevent="moveItems('right')"
@@ -41,63 +46,83 @@
             @keydown.ctrl.90.stop="undo"
             @keydown.ctrl.89.stop="redo"
             :style="{
-                            left: component.style.position.x + 'px',
-                            top: component.style.position.y + 'px',
-                            width: component.style.position.w + 'px',
-                            height: component.style.position.h + 'px',
-                            'background-color': component.style.backColor,
-                            zIndex: component.style.zIndex,
-                            borderWidth: component.style.borderWidth + 'px',
-                            borderStyle: component.style.borderStyle,
-                            borderColor: component.style.borderColor,
-                            transform: component.style.transform? `rotate(${component.style.transform}deg)`:'rotate(0deg)',
-                        }"
+              left: component.style.position.x + 'px',
+              top: component.style.position.y + 'px',
+              width: component.style.position.w + 'px',
+              height: component.style.position.h + 'px',
+              'background-color': component.style.backColor,
+              zIndex: component.style.zIndex,
+              borderWidth: component.style.borderWidth + 'px',
+              borderStyle: component.style.borderStyle,
+              borderColor: component.style.borderColor,
+              transform: component.style.transform
+                ? `rotate(${component.style.transform}deg)`
+                : 'rotate(0deg)',
+            }"
           >
             <component
               v-if="topoDatademo"
               v-bind:is="parseView(component)"
               :detail="component"
               :editMode="true"
-              :selected="selectedComponentMap[component.identifier]?true:false"
+              :selected="
+                selectedComponentMap[component.identifier] ? true : false
+              "
               :ref="'comp' + index"
             />
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-lt')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-lt')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-left-top"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-lc')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-lc')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-left-center"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-lb')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-lb')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-left-bottom"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-rt')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-rt')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-right-top"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-rc')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-rc')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-right-center"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-rb')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-rb')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-right-bottom"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-ct')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-ct')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-center-top"
             ></div>
             <div
-              @mousedown.stop="resizeMousedown(component,$event,index,'resize-cb')"
+              @mousedown.stop="
+                resizeMousedown(component, $event, index, 'resize-cb')
+              "
               v-show="selectedComponentMap[component.identifier]"
               class="resize-center-bottom"
             ></div>
@@ -105,18 +130,32 @@
         </template>
         <div
           class="topo-frame-selection"
-          :style="{width: frameSelectionDiv.width + 'px',height: frameSelectionDiv.height + 'px',top: frameSelectionDiv.top + 'px',left: frameSelectionDiv.left + 'px'}"
+          :style="{
+            width: frameSelectionDiv.width + 'px',
+            height: frameSelectionDiv.height + 'px',
+            top: frameSelectionDiv.top + 'px',
+            left: frameSelectionDiv.left + 'px',
+          }"
         ></div>
       </div>
     </vue-ruler-tool>
-    <div style="height: 40px;border-top: #ccc solid 1px;position:relative;background-color:white;">
-      <div style="position:absolute;left: 0px;top: 0px;" class="row">
-        <div style="line-height:40px;height:40px;">已选组件个数：{{selectedComponents.length}}</div>
+    <div
+      style="
+        height: 40px;
+        border-top: #ccc solid 1px;
+        position: relative;
+        background-color: white;
+      "
+    >
+      <div style="position: absolute; left: 0px; top: 0px" class="row">
+        <div style="line-height: 40px; height: 40px">
+          已选组件个数：{{ selectedComponents.length }}
+        </div>
         <q-btn
           label="预览"
           color="primary"
           size="xs"
-          style="margin-left:100px;height:30px;margin-top:5px;"
+          style="margin-left: 100px; height: 30px; margin-top: 5px"
           @click="fullScreen"
         />
 
@@ -124,33 +163,35 @@
           label="清空"
           color="primary"
           size="xs"
-          style="margin-left:100px;height:30px;margin-top:5px;"
+          style="margin-left: 100px; height: 30px; margin-top: 5px"
           @click="printData"
         />
         <q-btn
           label="保存数据"
           color="primary"
           size="xs"
-          style="margin-left:100px;height:30px;margin-top:5px;"
+          style="margin-left: 100px; height: 30px; margin-top: 5px"
           @click="showdialog"
         />
-        <q-btn
+        <!-- <q-btn
           label="获取之前数据"
           color="primary"
           size="xs"
           style="margin-left:100px;height:30px;margin-top:5px;"
           @click="getDataClick"
-        />
-          <q-btn
+        /> -->
+        <q-btn
           label="首页"
           color="primary"
           size="xs"
-          style="margin-left:100px;height:30px;margin-top:5px;"
+          style="margin-left: 100px; height: 30px; margin-top: 5px"
           @click="ToHome"
         />
       </div>
-      <div style="position:absolute;right: 10px;top: 0px;" class="row">
-        <div style="line-height:40px;height:40px;padding: 0px 5px;">缩放</div>
+      <div style="position: absolute; right: 10px; top: 0px" class="row">
+        <div style="line-height: 40px; height: 40px; padding: 0px 5px">
+          缩放
+        </div>
         <q-slider
           v-model="selectedValue"
           :min="30"
@@ -159,45 +200,56 @@
           label
           :label-value="`${selectedValue}%`"
           snap
-          style="width:200px;"
+          style="width: 200px"
         />
       </div>
     </div>
 
     <el-dialog title="添加项目" :visible.sync="alert_two" width="30%">
       <el-row :gutter="20">
-        <el-col :span="12" :offset="6">
-          <el-form label-width="100px">
-            <el-form-item label="展示用户名">
-            <el-upload
-                class="avatar-uploader"
-                :action="uploadUrl"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-              >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
-            <el-form-item label="展示用户名">
-              <el-input v-model="showname" :placeholder="shownamev"></el-input>
-            </el-form-item>
-            <el-form-item label="项目名称">
-              <el-input v-model="projectname" placeholder="请输入项目名称" @change="changetopoDataname"></el-input>
-            </el-form-item>
-          </el-form>
+        <el-col :span="16" :offset="4">
+          <Pctup
+            v-if="isid"
+            :dargjsondata="dargjsondata"
+            :showname="showname"
+         
+            :componentadata="componentadata"
+            @saveData="saveData"
+            :Projectnametlist="Projectnametlist"
+          ></Pctup>
+          <Pctupid
+            v-if="!isid"
+            :dargjsondata="dargjsondata"
+            :showname="showname"
+         
+            :componentadata="componentadata"
+            @saveData="saveData"
+            :Projectnametlist="Projectnametlist"
+          ></Pctupid>
+          <!-- <Pctupquasar :dargjsondata="dargjsondata" :projectname="projectname" :componentadata='componentadata' @saveData ='saveData'></Pctupquasar> -->
         </el-col>
       </el-row>
 
-      <span slot="footer" class="dialog-footer">
+      <!-- <span slot="footer" class="dialog-footer">
         <el-button @click="alert_two = false">取 消</el-button>
         <el-button type="primary" @click="saveData">确 定</el-button>
-      </span>
+      </span> -->
     </el-dialog>
 
-    <el-dialog title="项目展示" :visible.sync="alert" width="50%" class="dialogcss">
+    <el-dialog
+      title="项目展示"
+      :visible.sync="alert"
+      width="50%"
+      class="dialogcss"
+    >
       <template>
-          <Topotable :componentdata='componentdata' :totalnum='totalnum' @delClick='delClick'  @getData="getData" @handleClick='handleClick'></Topotable>
+        <Topotable
+          :componentdata="componentdata"
+          :totalnum="totalnum"
+          @delClick="delClick"
+          @getData="getData"
+          @handleClick="handleClick"
+        ></Topotable>
       </template>
       <!-- <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="pctclosedialog">关闭</el-button>
@@ -209,12 +261,10 @@
 <script>
 import VueRulerTool from "./ruler";
 import TopoBase from "./TopoBase";
-
 import uid from "@/assets/libs/uid.js";
-
 import topoUtil from "./util/topo-util";
 import { deepCopy } from "@/assets/libs/utils";
-import Topotable from "./Topotable"
+import Topotable from "./Topotable";
 
 import {
   checkInRange,
@@ -224,15 +274,21 @@ import {
 
 import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 import axios from "axios";
+import Pctup from "./pctup";
+import Pctupid from "./pctupid";
+import Pctupquasar from "./pctupquasar";
+
 export default {
   name: "TopoMain",
   extends: TopoBase,
   components: {
     VueRulerTool,
     Topotable,
+    Pctup,
+    Pctupid,
+    Pctupquasar,
   },
- 
-   
+
   computed: {
     ...mapState({
       topoEditor: (state) => state.topoEditor.topoData,
@@ -244,6 +300,8 @@ export default {
       selectedIsLayer: (state) => state.topoEditor.selectedIsLayer,
       copySrcItems: (state) => state.topoEditor.copySrcItems,
       copyCount: (state) => state.topoEditor.copyCount,
+      userAccount: (state) => state.example.userAccount,
+      Projectnametlist: (state) => state.example.Projectnametlist,
     }),
     layerStyle: function () {
       var scale = this.selectedValue / 100;
@@ -257,10 +315,10 @@ export default {
         );
       }
       if (this.configData.layer.width > 0) {
-        styles.push(`width: ${this.configData.layer.width}px`);
+        styles.push(`width: ${this.configData.layer.width}%`);
       }
       if (this.configData.layer.height > 0) {
-        styles.push(`height: ${this.configData.layer.height}px`);
+        styles.push(`height: ${this.configData.layer.height}%`);
       }
       var style = styles.join(";");
       return style;
@@ -301,18 +359,23 @@ export default {
       dataLine: [],
       columns: [{}],
       componentdata: [],
-      showname: "",
-      shownamev: "",
+      showname: [], //展示用户
+
       projectname: "",
-      page_size:10,
-      current_page:1,
-      totalnum:0,
-      uploadUrl: "api/project/manage/add",
-      imageUrl: "",
-       
-    
+      page_size: 10,
+      current_page: 1,
+      totalnum: 0,
+      dargjsondata: "",
+      componentadata: "", //单个数据
+      isid: true,
     };
   },
+  watch: {
+          'topoData': function(newVal){
+            console.log('边了');
+          },
+          
+      },
   methods: {
     ...mapMutations("topoEditor", [
       "setSelectedComponent",
@@ -327,7 +390,6 @@ export default {
       "undo",
       "redo",
       "gettopoEditor",
-      "gettopoDataname",
     ]),
     ...mapActions("topoEditor", ["loadDefaultTopoData"]),
     controlMousedown(component, event, index) {
@@ -593,8 +655,10 @@ export default {
     clickItem(component, index) {
       this.setLayerSelected(false);
       console.log(component);
-      console.log("index" + index);
+
+      console.log(component);
       if (this.selectedComponentMap[component.identifier] == undefined) {
+        component.dataBind.biz = component.name;
         this.setSelectedComponent(component); //重新渲染1
       } else {
         // console.log('如果已经选中，则不做任何处理')
@@ -603,8 +667,13 @@ export default {
     },
     clickComponent(index, component, event) {
       //点击组件
+
+      //  console.log(component.dataBind.biz);
       if (event.ctrlKey == true) {
         //点击了ctrl
+        component.dataBind.biz = 3;
+        console.log(component.dataBind.biz);
+        console.log(component);
         this.setLayerSelected(false);
         if (this.selectedComponentMap[component.identifier] == undefined) {
           this.addSelectedComponent(component);
@@ -635,8 +704,8 @@ export default {
     },
     removeItem(index, component) {
       //移除组件
-      console.log(index)
-       console.log(component)
+      // console.log(index)
+      //  console.log(component)
       this.execute({
         op: "del",
         index: index,
@@ -660,54 +729,37 @@ export default {
       window.open(href, "_blank");
     },
     printData() {
-      let deldata = this.topoData
-      deldata.components = []
-      console.log(this.topoData)
+      let deldata = this.topoData;
+      deldata.components = [];
+      console.log(this.topoData);
       //   var json = JSON.stringify(this.configData);
       //   console.log(json);
       //   alert(json);
-        this.gettopoEditor(deldata)
+      this.gettopoEditor(deldata);
     },
     showdialog() {
-      this.projectname = this.configData.name;
+     
       this.alert_two = true;
+      this.dargjsondata = JSON.stringify(this.configData);
+      
     },
     saveData() {
-      let that = this;
-      let name_p = this.showname === "" ? this.shownamev : this.showname;
+      this.alert_two = false;
 
-      console.log(localStorage.getItem("user_account"));
-      this.$axios
-        .post("/api/drag/add", {
-          username: localStorage.getItem("user_account"),
-          showname: name_p,
-          projectname: that.projectname,
-          dargjsondata: JSON.stringify(this.configData),
-        })
-        .then((res) => {
-          console.log(res);
-          if (res.data.ret_code == 200) {
-            that.alert_two = false;
-            that.$message({
-              message: "添加成功",
-              type: "success",
-            });
-          }
-        });
-      localStorage.setItem("topoData", JSON.stringify(this.configData));
+      
     },
-    getDataClick(){
-      this.getData()
+    getDataClick() {
+      this.getData();
     },
     getData(page) {
-     let that = this;
-    console.log(page);
-      this.current_page = page ? page : this.current_page
+      let that = this;
+      console.log(page);
+      this.current_page = page ? page : this.current_page;
       this.$axios
         .post("/api/drag/list", {
           username: localStorage.getItem("user_account"),
-          page_size:this.page_size,
-          current_page:this.current_page
+          page_size: this.page_size,
+          current_page: this.current_page,
         })
         .then((res) => {
           console.log(res.data.extra);
@@ -715,7 +767,7 @@ export default {
           //    console.log(Jsondata.components);
           //   //  this.gettopoEditor(Jsondata)
           that.componentdata = res.data.extra;
-          this.totalnum =  res.data.total
+          this.totalnum = res.data.total;
           //  that.configData = Jsondata
         });
       // this.this.configData =
@@ -731,9 +783,7 @@ export default {
       // this.configData = Jsondata
       this.alert = false;
     },
-    changetopoDataname() {
-      this.gettopoDataname(this.projectname);
-    },
+   
     delClick(row) {
       console.log(row._id);
       let that = this;
@@ -762,45 +812,62 @@ export default {
           });
         });
     },
-    currentchange(){
-
-    },
-    ToHome(){
+    currentchange() {},
+    ToHome() {
       this.$router.push({
-         path:'/Home'
-      }
-       
-      )
+        path: "/Home",
+      });
     },
     handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-    
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    // 展示用户列表
+    usershownamelist() {
+      let that = this;
+      this.$axios
+        .post("/api/drag/userlist", {
+          user_account: localStorage.getItem("user_account"),
+        })
+        .then((res) => {
+          res.data.extra.map((item) => {
+            let arr = {};
+            arr.value = item.user_account;
+            arr.label = item.user_account;
+            that.showname.push(arr);
+          });
+          // this.showname = res.data.extra
 
+          console.log(that.showname);
+        });
+    },
+
+    draglistid() {
+      let that = this;
+      if (this.$route.query.id) {
+        this.isid = false;
+        this.$axios
+          .post("/api/drag/listid", {
+            id: that.$route.query.id,
+          })
+          .then((res) => {
+            that.componentadata = res.data.extra[0];
+            console.log(that.componentadata);
+             let data = JSON.parse(that.componentadata.dargjsondata)
+         
+             this.gettopoEditor(data)
+          
+            that.handleClick(res.data.extra[0]);
+          });
+      }
+    },
   },
   mounted() {
-    console.log(typeof(dddvvv))
-    // this.$axios.post("http://localhost:3000/api/user/add",{
-    //     username:"woshi",
-    //     password:"11222",
-    //     email:"ddddd"
-    // }).then(res=>{
-    //   console.log(res)
-    // })
-    
-    let that =this
-    if(this.$route.query.id){
-      this.$axios.post('/api/drag/listid',{
-        id : that.$route.query.id
-      }).then(res=>{
-        console.log(res.data.extra[0])
-        that.handleClick(res.data.extra[0])
-      })
-    }
-    this.shownamev = localStorage.getItem("user_account");
+    this.usershownamelist();
+
+    this.draglistid();
+
     this.isname = this.topoDatademo;
     this.loadDefaultTopoData();
-  
   },
 };
 </script>
@@ -960,8 +1027,8 @@ export default {
   .q-pt-none {
     padding: 20px !important;
   }
-  .dialogcss .el-dialog__body{
-     padding: 5px 20px 30px;
+  .dialogcss .el-dialog__body {
+    padding: 5px 20px 30px;
   }
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
@@ -971,7 +1038,7 @@ export default {
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
+    border-color: #409eff;
   }
   .avatar-uploader-icon {
     font-size: 28px;
@@ -986,6 +1053,5 @@ export default {
     height: 178px;
     display: block;
   }
-  
 }
 </style>

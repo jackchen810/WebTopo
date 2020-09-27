@@ -3,11 +3,14 @@
     <div class="topo-properties-nav">
       <!-- <q-select v-model="curComponent" :options="componentOptions" @input="changeComponent" style="margin-right:0px;height:43px;border:none;" /> -->
       <template v-if="isLayer">
-        <q-input v-model="topoDataname" @change="changetopoData" />
+        <!-- <q-input v-model="topoData.name" @change="changetopoData" /> -->
+        <q-select v-model="topoDataname" :options="configObjectName" label="项目" @input="changetopoData"/>
+
       </template>
-      <template v-if="configObject != null && isLayer == false">
-        <q-input v-model="configObject.name" />
-      </template>
+      <!-- <template v-if="configObject != null && isLayer == false">
+        <q-select v-model="configObject.name" :options="configObjectName" label="Standard" />
+       
+      </template> -->
     </div>
     <template v-if="configObject != null && isLayer == false">
       <div class="topo-properties-tabs">
@@ -327,13 +330,23 @@
     <template v-if="isLayer">
       <table style="margin-top: 10px">
         <tr>
-          <td width="40%">BackColor</td>
+          <td width="40%">背景色</td>
           <td>
-            <q-input v-model.lazy="topoData.layer.backColor" />
+            <q-input filled v-model="topoData.layer.backColor" class="my-input">
+                      <template v-slot:append>
+                        <q-icon name="colorize" class="cursor-pointer">
+                          <q-popup-proxy transition-show="scale" transition-hide="scale">
+                            <q-color v-model="topoData.layer.backColor" />
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
+
+            <!-- <q-input v-model.lazy="topoData.layer.backColor" /> -->
           </td>
         </tr>
         <tr>
-          <td>BackImage</td>
+          <td>背景图片</td>
           <td>
             <q-input v-model.lazy="topoData.layer.backgroundImage" />
           </td>
@@ -347,13 +360,13 @@
         </tr>
         
         <tr v-if="layerWH == 'custom'">
-          <td>W</td>
+          <td>宽（%）</td>
           <td>
             <q-input v-model.lazy="topoData.layer.width" />
           </td>
         </tr>
         <tr v-if="layerWH == 'custom'">
-          <td>H</td>
+          <td>高（%）</td>
           <td>
             <q-input v-model.lazy="topoData.layer.height" />
           </td>
@@ -398,6 +411,7 @@ export default {
         xdata:[10,20,30,60,50,30]
       },
       topoDataname:'',
+      configObjectName:[]
      
     };
   },
@@ -450,8 +464,13 @@ export default {
     ...mapMutations('topoEditor',[
             'setdemo',
             'setSelectedComponent',
-            'gettopoDataname'
+            'gettopoEditor'
         ]),
+    ...mapMutations('example',[
+            'getProjectnametlist',
+        ]),
+          
+      
      async chengeval(e){
       this.valOputions = e
       //刷新所有组件
@@ -530,14 +549,32 @@ export default {
       this.configObject.action.push(action);
     },
     changetopoData(){
-      
-      this.gettopoDataname( this.topoDataname)
-      console.log(this.topoData.name);
+      console.log(this.topoData);
+      this.topoData.name = this.topoDataname
+      localStorage.setItem("topoData", JSON.stringify(this.topoData));
+      this.gettopoEditor(this.topoData)
+    },
+     // 获取项目名称
+    async list_pct_name(){
+        await this.$axios.post('/api/admin/list',{
+        user_account : localStorage.getItem('user_account')
+      }).then(res=>{
+        if(res.data.ret_code == 0){
+          this.topoDataname = this.topoData.name 
+          this.configObjectName = res.data.extra[0].user_projects
+          this.getProjectnametlist(this.configObjectName)
+        }
+      })
     }
   },
   mounted() {
-    this.topoDataname = this.topoData.name
-    console.log(this.isScaleRevise)
+    this.list_pct_name()
+  
+    if(!this.$route.query.id){
+       this.topoDataname = '图层'
+    }
+    
+    
   },
 };
 </script>

@@ -29,7 +29,7 @@
 import TopoBase from './TopoBase';
 
 import topoUtil from './util/topo-util';
-import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
+
 export default {
     name: 'TopoRender',
     extends: TopoBase,
@@ -37,11 +37,7 @@ export default {
         
     },
     computed: {
-        ...mapState(
-            {
-                 topoData: (state) => state.topoEditor.topoData,
-            }
-        ),
+      
         layerStyle:function () {
             var styles = [];
             if(this.configData.layer.backColor) {
@@ -74,9 +70,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations('topoEditor',[
-            'buttomupdata'
-        ]),
+     
         parseView(component) {
             return topoUtil.parseViewName(component);
         },
@@ -159,6 +153,7 @@ export default {
                           that.temp = res.data.extra[0].dargjsondata
                             this.configData = JSON.parse(this.temp)
                             console.log( this.configData);
+                            localStorage.setItem('topoData', res.data.extra[0].dargjsondata)
                     }else{
                         this.$message({
                             message: '无权限',
@@ -174,8 +169,12 @@ export default {
         //这里只是纯前端项目，实际应该从后台拿取数据
         // console.log(this.$route.query.id)
  
-       
-      this.configData = JSON.parse(localStorage.getItem('topoData'))
+        if(this.$route.query.id){
+            this.getidData()
+              
+        }else{
+
+        }  
         
        
         // console.log(temp)

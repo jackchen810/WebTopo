@@ -1,22 +1,21 @@
 <template>
   <div class="login-wrap">
-    <div class="ms-login">
-       
-      <div class="q-pa-md">
-                <div class="text-h4">
-                    金大万翔物联网管理平台
-                    <q-badge align="top">cli v1.0.0</q-badge>
-             </div>
-       
-        <div class="q-gutter-md" style="max-width: 300px">
-          <q-form @submit="submitForm"  class="q-gutter-md" >
+     <div class="loginstyle">
+    <div class="q-pa-md">
+     
+        <div class="text-h4">
+          金大万翔物联网管理平台
+          <q-badge align="top">cli v1.0.0</q-badge>
+        </div>
+        <div class="q-gutter-md qlogin">
+          <q-form @submit="submitForm">
             <q-input
               filled
               v-model="ruleForm.username"
               label="用户名"
               hint="必填"
               lazy-rules
-              :rules="[ val => val && val.length > 0 || '请输入用户名']"
+              :rules="[(val) => (val && val.length > 0) || '请输入用户名']"
             />
             <q-input
               filled
@@ -25,18 +24,34 @@
               label="密码"
               hint="必填"
               lazy-rules
-              :rules="[
-                    val => val !== null && val !== '' || '请输入密码',
-              ]"
+              :rules="[(val) => (val !== null && val !== '') || '请输入密码']"
             />
 
-            <div>
-              <q-btn label="登录" type="submit" color="primary" style="width: 240px" />
+            <div style="padding: 20px">
+              <q-btn
+                label="登录"
+                type="submit"
+                color="primary"
+                style="width: 240px"
+              />
             </div>
           </q-form>
         </div>
+        <div class="login-icp">
+          <el-link
+            href="http://www.beian.miit.gov.cn"
+            type="primary"
+            target="_blank"
+            >京ICP备15044078号-1</el-link
+          >
+          <br />
+          <el-link type="primary" disabled
+            >2018-2020 北京金大万翔环保科技有限公司 版权所有</el-link
+          >
+        </div>
       </div>
-      <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+    </div>
+    <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                 <el-form-item prop="username">
                     <el-input v-model="ruleForm.username" placeholder="账号" ></el-input>
                 </el-form-item>
@@ -47,13 +62,6 @@
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
       </el-form> -->
-
-      <div class="login-icp">
-        <el-link href="http://www.beian.miit.gov.cn" type="primary" target="_blank">京ICP备15044078号-1</el-link>
-        <br />
-        <el-link type="primary" disabled>2018-2020 北京金大万翔环保科技有限公司 版权所有</el-link>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -61,7 +69,7 @@
 import axios from "axios";
 import crypto from "crypto";
 
-
+import { mapState, mapMutations, mapAction } from "vuex";
 // import './login'
 // import {Form,FormItem,} from 'element-ui'
 //import global_ from 'components/common/Global';
@@ -69,14 +77,15 @@ import crypto from "crypto";
 export default {
   name: "Login",
   components: {},
+
   data: function () {
     return {
       // private property
       _keyStr:
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
       ruleForm: {
-        username: "admin",
-        password: "123456",
+        username: "",
+        password: "",
       },
       name: null,
       password: null,
@@ -88,6 +97,7 @@ export default {
   },
 
   methods: {
+  
     onSubmit() {},
 
     getmd5(password) {
@@ -103,20 +113,16 @@ export default {
         user_password: self.getmd5(self.ruleForm.password),
         //user_password: self.encode(self.ruleForm.password)
       };
-      self.$axios.post('/api/admin/login', params).then(
+      self.$axios.post("/api/admin/login", params).then(
         function (res) {
           console.log(res);
           if (res.data.ret_code == 0) {
             let user_type = res.data.extra;
             localStorage.setItem("user_type", user_type);
             localStorage.setItem("user_account", self.ruleForm.username);
+           
             //localStorage.setItem('ms_username', self.ruleForm.username);
-            if (user_type == 0) {
-                
-              self.$router.push("/Home");
-            } else {
-              self.$router.push("/");
-            }
+            self.$router.push("/Home");
           } else {
             self.$message(res.data.ret_msg);
           }
@@ -237,32 +243,29 @@ export default {
 </script>
 
 <style scoped>
-.login-wrap {
-  position: relative;
-  width: 100%;
-  height: 100%;
+
+.loginstyle {
+  width: 600px;
+  position:absolute;
+  height:600px;
+  top:50%;
+ left: 50%;
+  margin: -200px 0 0 -250px;
 }
-.ms-title {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  /* margin-top: -230px; */
-  text-align: center;
-  font-size: 30px;
-  color: #fff;
-}
-.q-gutter-md{
- 
-   margin: 0 auto 15px;
+.qlogin{ margin: 0 auto;}
+.q-gutter-md {
   width: 300px;
-  height: 300px;
+
   /* margin: -150px 0 0 -150px; */
-  
+
   box-sizing: border-box;
   border-radius: 5px;
   background: #fff;
 }
-.text-h4{ text-align: center; padding:200px 20px 20px;}
+.text-h4 {
+  text-align: center;
+  padding: 0px 20px 20px;
+}
 .login-btn {
   text-align: center;
 }
@@ -272,7 +275,6 @@ export default {
 }
 
 .login-icp {
-  margin-top: 200px;
   text-align: center;
   color: #fff;
 }

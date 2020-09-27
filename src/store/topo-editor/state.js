@@ -21,4 +21,5 @@ export default {
   copyCount: 0,//copy计数，对于同一个复制源，每次复制后计数+1
   undoStack: [],//
   redoStack: [],//
+  
 }

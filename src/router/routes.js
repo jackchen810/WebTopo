@@ -1,6 +1,7 @@
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import Fullscreen from '../pages/topo/Fullscreen'
+import Fullscreenpage from '../pages/topo/Fullscreenpage'
 const routes = [
   {
     path: '/',
@@ -10,7 +11,24 @@ const routes = [
   {
     path: '/Home',
     name: 'Home',
-    component: Home
+    component: Home,
+    children:[
+      {
+        path: '/',
+        //name: '/',
+        component: resolve => require(['../views/Projectmanage'], resolve)
+    },
+      {
+          path: '/Projectmanage',
+          //name: '/',
+          component: resolve => require(['../views/Projectmanage'], resolve)
+      },
+      {
+        path: '/usermanage',
+        //name: '/',
+        component: resolve => require(['../views/usermanage'], resolve)
+    },
+    ]
   },
   {
     path: '/TopoLayout',
@@ -26,6 +44,11 @@ const routes = [
     path: '/Fullscreen',
     name: 'Fullscreen',
     component: Fullscreen
+  },
+  {
+    path: '/Fullscreenpage',
+    name: 'Fullscreenpage',
+    component: Fullscreenpage
   },
   // {
   //   path: '/fullscreen', name: 'TopoFullscreen',component: () => import('pages/topo/Fullscreen.vue')

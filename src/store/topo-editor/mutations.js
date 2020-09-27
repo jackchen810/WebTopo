@@ -231,17 +231,12 @@ export const setdemo = (state,itemsv) =>{
     state.selectedComponentMapdemo = itemsv
 }
 
-
+// 修改 
 export const gettopoEditor = (state,itemsv) =>{
     state.topoData = itemsv
-    // console.log(state) 
 }
 
-export const gettopoDataname = (state,itemsv) =>{
-    state.topoData.name = itemsv
-    // console.log(state)
-   
-}
+
 
 
 export const buttomupdata = (state,itemsve) => {
