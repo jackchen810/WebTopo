@@ -21,10 +21,10 @@
                         "x": 100,
                         "y": 100,
                         "w": 300,
-                        "h": 40
+                        "h": 20
                     },
                     "backColor": "transparent",
-                    "foreColor": "grey",
+                    "foreColor": "rgb(115,222,69)",
                     "zIndex": 1,
                     "transform": 0,
                     "lineWidth": 2,

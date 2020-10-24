@@ -65,9 +65,7 @@ export default {
       // var ctx = canvas.getContext("2d");
        this.color = this.getForeColor();
  
-       if(this.color == 'grey'){
-         this.color = 'rgb(115,222,69)'
-       }
+     
       ctx.clearRect(0, 0, this.winWidth,  this.winHeight);
       var winWidth = this.winWidth;
       var winHeight = this.winHeight;
