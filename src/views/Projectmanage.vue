@@ -36,16 +36,9 @@
       
       <CPagination :count="count" :emitEvent="emitEvent" @pageChange="pageChange"  ></CPagination>
     </div>
-    
-     <el-dialog
-        title="设置"
-        :visible.sync="isSetup"
-        width="20%"
-        center>
-
+    <q-dialog title="设置" v-model="isSetup" center>
           <Setproject :userDatalist = "userDatalist" :userUrl = "userUrl"  :componentdata-val = "componentdataVal" @closedialog = "closedialog"></Setproject>
-   
-    </el-dialog>
+    </q-dialog>
 
   </div>
 </template>
@@ -61,7 +54,7 @@ export default {
     Setproject
   },
   computed: {
-      ...mapState({
+     ...mapState({
        userDatalist: (state) => state.example.userDatalist,
     }),
    },
@@ -78,10 +71,6 @@ export default {
       model:'',
       userUrl:'',
       componentdataVal:{}
-      
-
-   
-     
     };
   },
   mounted: function () {
@@ -100,7 +89,6 @@ export default {
       this.current_page = offset
       console.log(limit + "====" + offset);
       offset = offset == 0 ? offset + 1 : offset / 10 + 1;
-   
         this.$axios
         .post("/api/drag/list", {
           user_account: localStorage.getItem("user_account"),
@@ -111,8 +99,6 @@ export default {
           that.componentdata = res.data.extra;
           this.count = res.data.total;
         });
-      
-      
       // this.this.configData =
     },
     getpaginationtal(val) {

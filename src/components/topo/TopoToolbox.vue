@@ -16,7 +16,7 @@
                             </template>
                             <template v-else>
                                 <div class="toolbox-item-icon">
-                                    <img class="topo-dom" :src="value.icon" style="width: 40px;height: 40px;" />
+                                    <img class="topo-dom" :src="value.icon" style="width:100%" />
                                 </div>
                                 <div class="toolbox-item-text">{{value.text}}</div>
                             </template>
@@ -35,7 +35,7 @@ import jsonBase from './data-toolbox/base.json';
 import jsonChart from './data-toolbox/chart.json';
 import jsonOffice from './data-toolbox/office.json';
 import jsonSvg from './data-toolbox/svg.json';
-import jsonSvgDianli from './data-toolbox/svg-dianli.json';
+import interaction from './data-toolbox/interaction.json';
 export default {
     name: 'TopoToolbox',
     data() {
@@ -59,7 +59,8 @@ export default {
         this.toolbox.push(jsonBase);
         this.toolbox.push(jsonChart);
         this.toolbox.push(jsonOffice);
-        this.toolbox.push(jsonSvg);      
+        this.toolbox.push(jsonSvg);  
+         this.toolbox.push(interaction);        
         // this.toolbox.push(jsonSvgDianli);        
     }
 }
@@ -77,15 +78,17 @@ export default {
         flex-wrap: wrap;
         justify-content: flex-start;
         align-content: space-between;
+    
 
         .toolbox-item {
-            width: 70px;
+            width: calc(100%/2 - 20px);
             margin: 10px 5px;
             padding: 5px;
             color: #777;
             border: transparent solid 1px;
 
             .toolbox-item-icon {
+                width:100%;
                 text-align: center;
             }
 

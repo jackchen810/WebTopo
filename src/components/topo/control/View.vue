@@ -25,7 +25,6 @@ export default {
             }
         },
         lineHeight: function() {
-         
             if(this.detail.style.lineHeight == undefined) {
                 return this.detail.style.position.h;
             }

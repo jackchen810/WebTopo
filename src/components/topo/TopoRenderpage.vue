@@ -1,208 +1,247 @@
 <template>
-    <div class="topo-render" :style="layerStyle" v-if="configData.layer">
-        <template v-for="(component,index) in configData.components">
-            <div class="topo-render-wrapper"
-                    :key="index"
-                    @click="doClickComponent(component)"
-                    @dblclick="doDbClickComponent(component)"
-                    :class="{'topo-render-wrapper-clickable': component.action.length > 0 }"
-                    v-show="component.style.visible == true? true:component.style.visible.value"
-                    :style="{
-                        left: component.style.position.x + 'px',
-                        top: component.style.position.y + 'px',
-                        width: component.style.position.w + 'px',
-                        height: component.style.position.h + 'px',
-                        backgroundColor: component.style.backColor,
-                        zIndex: component.style.zIndex,
-                        borderWidth: component.style.borderWidth + 'px',
-                        borderStyle: component.style.borderStyle,
-                        borderColor: component.style.borderColor,
-                        transform: component.style.transform? `rotate(${component.style.transform}deg)`:'rotate(0deg)',
-                    }">
-                <component v-bind:is="parseView(component)" :detail="component" ref="spirit" />
-            </div>
-        </template>
-    </div>
+  <div class="topo-render" :style="layerStyle" v-if="configData.layer">
+    <template v-for="(component, index) in configData.components">
+      <div
+        class="topo-render-wrapper"
+        :key="index"
+        @click="doClickComponent(component)"
+        @dblclick="doDbClickComponent(component)"
+        :class="{
+          'topo-render-wrapper-clickable': component.action.length > 0,
+        }"
+        v-show="
+          component.style.visible == true ? true : component.style.visible.value
+        "
+        :style="{
+          left: component.style.position.x + 'px',
+          top: component.style.position.y + 'px',
+          width: component.style.position.w + 'px',
+          height: component.style.position.h + 'px',
+          backgroundColor: component.style.backColor,
+          zIndex: component.style.zIndex,
+          borderWidth: component.style.borderWidth + 'px',
+          borderStyle: component.style.borderStyle,
+          borderColor: component.style.borderColor,
+          transform: component.style.transform
+            ? `rotate(${component.style.transform}deg)`
+            : 'rotate(0deg)',
+        }"
+      >
+        <component
+          v-bind:is="parseView(component)"
+          :detail="component"
+          ref="spirit"
+        />
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>
-import TopoBase from './TopoBase';
+import TopoBase from "./TopoBase";
 
-import topoUtil from './util/topo-util';
-
+import topoUtil from "./util/topo-util";
+import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 export default {
-    name: 'TopoRender',
-    extends: TopoBase,
-    components: {
-        
-    },
-    computed: {
-      
-        layerStyle:function () {
-            var styles = [];
-            if(this.configData.layer.backColor) {
-                styles.push(`background-color: ${this.configData.layer.backColor}`);
-            }
-            if(this.configData.layer.backgroundImage) {
-                styles.push(`background-image: url("${this.configData.layer.backgroundImage}")`);
-            }
-            if(this.configData.layer.width > 0) {
-                styles.push(`width: ${this.configData.layer.width}%`);
-            }
-            if(this.configData.layer.height > 0) {
-                styles.push(`height: ${this.configData.layer.height}%`);
-            }
-            var style = styles.join(';');
-            return style;
-        }
-    },
-    data() {
-        return {
-            configData: {
-                
-            },
-             buttomdata:{
-                 isclick : true,
-                 identifier:'',
-                 url:''
-            },
-            temp:''
-        }
-    },
-    methods: {
+  name: "TopoRender",
+  extends: TopoBase,
+  props: ["facilityData", "deviceList","configData"],
+  components: {},
+  computed: {
+    ...mapState({
+      topoData: (state) => state.topoEditor.topoData,
+    }),
+    layerStyle: function () {
+      var styles = [];
+      if (this.configData.layer.backColor) {
+        styles.push(`background-color: ${this.configData.layer.backColor}`);
+      }
+      if (this.configData.layer.backgroundImage) {
+        styles.push(
+          `background-image: url("${this.configData.layer.backgroundImage}")`
+        );
+      }
+       if (this.configData.layer.width > 0) {
+        styles.push(`width: ${this.configData.layer.width}px`);
+      }
+      if (this.configData.layer.height > 0) {
+        styles.push(`height: ${this.configData.layer.height}px`);
+      }
      
-        parseView(component) {
-            return topoUtil.parseViewName(component);
-        },
-        doClickComponent(component){   
-            
-            if(component.type == 'buttom'){
-                this.buttomdata.identifier = component.identifier
-                  this.buttomdata.url = (this.buttomdata.isclick !==true)?'statics/topo/svg/on1.svg':'statics/topo/svg/off1.svg'
-                    this.buttomupdata(this.buttomdata)
-                    this.buttomdata.isclick = !this.buttomdata.isclick
-            }
-            
-            for(var i = 0; i < component.action.length; i++) {
-                var action = component.action[i];                
-                if(action.type == 'click') {  
-                     this.handleComponentActuib(action);                  
-                }
-            }        
-        },
-        doDbClickComponent(component){      
-            for(var i = 0; i < component.action.length; i++) {
-                var action = component.action[i];                
-                if(action.type == 'dblclick') {  
-                     this.handleComponentActuib(action);                  
-                }
-            }
-        },
-        //显示隐藏
-        handleComponentActuib(action){
-            var _this = this;
-            if(action.action == 'visible'){
-                if(action.showItems.length > 0) {
-                    action.showItems.forEach(identifier => {
-                        _this.showComponent(identifier,true);
-                    });
-                }
-                if(action.hideItems.length > 0) {
-                    action.hideItems.forEach(identifier => {
-                        _this.showComponent(identifier,false);
-                    });
-                }
-                	
-            } else if(action.action == 'Invisible') {                        
-                _this.sendFun(action);
-            } 
-        },
-        showComponent(identifier,visible) {
-            console.log('show:' + identifier + ',visible:' + visible);
-            var spirits = this.$refs['spirit'];
-            for(var i = 0; i < spirits.length; i++){
-                var spirit = spirits[i];
-                if(spirit.detail.identifier == identifier) {
-                    spirit.detail.style.visible = visible;
-                    break;
-                }
-            }
-        },
-         getData(){
-            let that = this
-             this.$axios.post(
-               '/api/drag/list',
-               {
-                   username:localStorage.getItem('user_account'),
-                }
-           ).then(res =>{
-               console.log(typeof(res.data.extra[0].dargjsondata));
-               var Jsondata = JSON.parse(res.data.extra[0].dargjsondata)
-                console.log(Jsondata);
-               that.configData = Jsondata
-           })
-            // this.this.configData = 
-        },
-        async getidData(){
-                let that = this
-                 await this.$axios.post('/api/drag/listid',{
-                    id : that.$route.query.id
-                }).then(res=>{
-                    // console.log(res.data.extra[0].dargjsondata);
-                    if( res.data.extra[0].project_showname == localStorage.getItem('user_account')){
-                          that.temp = res.data.extra[0].dargjsondata
-                            this.configData = JSON.parse(this.temp)
-                            console.log( this.configData);
-                            localStorage.setItem('topoData', res.data.extra[0].dargjsondata)
-                    }else{
-                        this.$message({
-                            message: '无权限',
-                            type: 'warning'
-                            });
-                    }
-                  
-                })
-        }
+      var style = styles.join(";");
+      return style;
     },
-    mounted() {
-        // this.getData()
-        //这里只是纯前端项目，实际应该从后台拿取数据
-        // console.log(this.$route.query.id)
- 
-        if(this.$route.query.id){
-            this.getidData()
+  },
+  watch: {
+    facilityData: function () {
+      clearInterval(this.timer)
+      this.$nextTick(function () {
+        this.$refs.spirit.map((item) => {
+          this.deviceList.map((itemD) => {
+            if (
+              item.detail.dataBind.queryParam.sensor_facility ==
+              itemD.dev_cn_name
+            ) {
+              item.detail.dataBind.queryParam.devunit_name = itemD.devunit_name;
+            }
+          });
+            
+           this.facilityData.map((itemF) => {
+            if (
+              item.detail.dataBind.queryParam.devunit_name == itemF.devunit_name
               
-        }else{
-
-        }  
-        
+            ) {
+              itemF.data.map((itemdata) => {
+                if (
+                  itemdata.varId == item.detail.dataBind.queryParam.sensor_No
+                ){
+                   
+                  this.timer = setInterval(() => {
+                        // console.log(1+Math.random().toFixed(1)/10);
+                     if(isNaN(itemdata.varValue) == false){
+                        console.log(parseInt(itemdata.varValue));
+                       item.detail.style.text =  (parseInt(itemdata.varValue) * (1+Math.floor(Math.random()*10)/1000)).toFixed(2);
+                     }
+                  }, 1000);
+                  // Math.ceil(Math.random()*10)
+                }
+              });
+            }
+          });
+          this.configData.components.map((itemC) => {
+            itemC = item.detail;
+          });
+      
+          if(item.detail.type == 'buttom'){
+            item.buttomdata.url = item.detail.style.text == true ? "statics/topo/svg/on1.svg" : "statics/topo/svg/off1.svg";
+          }  
+        });
        
-        // console.log(temp)
-        // this.configData = JSON.parse(temp);
-        // console.log( this.configData)
-        
-    }
-}
+        // localStorage.setItem('topoData',this.configData )
+      });
+    },
+  },
+  data() {
+    return {
+    
+      buttomdata: {
+        isclick: true,
+        identifier: "",
+        url: "",
+      },
+      temp: "",
+      devicedata: [],
+      timer:''
+    };
+  },
+  methods: {
+    ...mapMutations("topoEditor", ["buttomupdata"]),
+    parseView(component) {
+      return topoUtil.parseViewName(component);
+    },
+    doClickComponent(component) {
+      if (component.type == "buttom") {
+        console.log("buttom");
+        console.log(component);
+        this.$refs.spirit.map((item) => {
+          if (item.detail.name == component.name) {
+            if(item.detail.style.text == undefined){
+                this.$message.error('设备未绑定')
+            }
+           console.log( item.buttomdata.isclick);
+           item.buttomdata.isclick =  item.buttomdata.isclick == true ? false : true;
+           console.log( item.buttomdata.isclick);
+            item.buttomdata.url = item.buttomdata.isclick == true ? "statics/topo/svg/on1.svg" : "statics/topo/svg/off1.svg";
+            console.log(item.buttomdata.url );
+          }
+        });
+
+        localStorage.getItem("topoData", this.configData);
+        // this.buttomupdata(this.buttomdata)
+        // this.buttomdata.isclick = !(component.style.text)
+      }
+      for (var i = 0; i < component.action.length; i++) {
+        var action = component.action[i];
+        if (action.type == "click") {
+          this.handleComponentActuib(action);
+          console.log("click");
+        }
+      }
+    },
+    doDbClickComponent(component) {
+      for (var i = 0; i < component.action.length; i++) {
+        var action = component.action[i];
+        if (action.type == "dblclick") {
+          this.handleComponentActuib(action);
+        }
+      }
+    },
+    //显示隐藏
+    handleComponentActuib(action) {
+      var _this = this;
+      if (action.action == "visible") {
+        if (action.showItems.length > 0) {
+          action.showItems.forEach((identifier) => {
+            _this.showComponent(identifier, true);
+          });
+        }
+        if (action.hideItems.length > 0) {
+          action.hideItems.forEach((identifier) => {
+            _this.showComponent(identifier, false);
+          });
+        }
+      } else if (action.action == "Invisible") {
+        _this.sendFun(action);
+      }
+    },
+    showComponent(identifier, visible) {
+      console.log("show:" + identifier + ",visible:" + visible);
+      var spirits = this.$refs["spirit"];
+      for (var i = 0; i < spirits.length; i++) {
+        var spirit = spirits[i];
+        if (spirit.detail.identifier == identifier) {
+          spirit.detail.style.visible = visible;
+          break;
+        }
+      }
+    },
+     
+  },
+  created(){
+    // this.configData = JSON.parse(localStorage.getItem("topoData"));
+    // console.log(this.configData);
+  },
+  mounted() {
+    //这里只是纯前端项目，实际应该从后台拿取数据
+    // console.log(this.$route.query.id)
+    // this.$nextTick(()=>{
+    //    this.configData = JSON.parse(localStorage.getItem("topoData"));
+    // })
+      console.log(this.configData);
+    
+    
+  },
+};
 </script>
 
 <style lang="scss">
-    .topo-render {
-        overflow: auto;
-        background-color: white;
-        background-clip: padding-box;
-        background-origin: padding-box;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        position: relative;
-        height: 100%;
+.topo-render {
+  overflow: auto;
+  background-color: white;
+  background-clip: padding-box;
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  height: 100%;
 
-        .topo-render-wrapper {
-            position: absolute;
-        }
+  .topo-render-wrapper {
+    position: absolute;
+  }
 
-        .topo-render-wrapper-clickable {
-            cursor: pointer;
-        }
-    }
+  .topo-render-wrapper-clickable {
+    cursor: pointer;
+  }
+}
 </style>
 

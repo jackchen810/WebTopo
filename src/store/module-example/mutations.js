@@ -13,6 +13,10 @@ export const getuserDatalist = (state,itemsv) =>{
 }
 //  项目列表
 export const getProjectnametlist = (state,itemsv) =>{
+    console.log(itemsv);
     state.Projectnametlist = itemsv
-    
+}
+// 设备组
+export const ProjectFacility = (state,itemsv) =>{
+    state.ProjectFacility = itemsv
 }

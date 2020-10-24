@@ -315,10 +315,10 @@ export default {
         );
       }
       if (this.configData.layer.width > 0) {
-        styles.push(`width: ${this.configData.layer.width}%`);
+        styles.push(`width: ${this.configData.layer.width}px`);
       }
       if (this.configData.layer.height > 0) {
-        styles.push(`height: ${this.configData.layer.height}%`);
+        styles.push(`height: ${this.configData.layer.height}px`);
       }
       var style = styles.join(";");
       return style;
@@ -372,7 +372,7 @@ export default {
   },
   watch: {
           'topoData': function(newVal){
-            console.log('边了');
+            // console.log('边了');
           },
           
       },
@@ -390,13 +390,14 @@ export default {
       "undo",
       "redo",
       "gettopoEditor",
+      'gettopoDataname'
     ]),
     ...mapActions("topoEditor", ["loadDefaultTopoData"]),
     controlMousedown(component, event, index) {
-      console.log(component);
-      console.log("index=====" + index); // 用户设置属性值
+   
+      // console.log("index=====" + index); // 用户设置属性值
       this.index = index;
-      console.log(this.selectedComponentMap);
+      // console.log(this.selectedComponentMap);
       if (event.ctrlKey) {
         return;
       }
@@ -650,11 +651,12 @@ export default {
       return true;
     },
     parseView(component) {
+    
       return topoUtil.parseViewName(component);
     },
     clickItem(component, index) {
       this.setLayerSelected(false);
-      console.log(component);
+    
 
       console.log(component);
       if (this.selectedComponentMap[component.identifier] == undefined) {
@@ -745,12 +747,11 @@ export default {
     },
     saveData() {
       this.alert_two = false;
-
-      
     },
     getDataClick() {
       this.getData();
     },
+    // 获取图层数据
     getData(page) {
       let that = this;
       console.log(page);
@@ -836,36 +837,34 @@ export default {
             that.showname.push(arr);
           });
           // this.showname = res.data.extra
-
           console.log(that.showname);
         });
     },
-
     draglistid() {
-      let that = this;
       if (this.$route.query.id) {
         this.isid = false;
         this.$axios
           .post("/api/drag/listid", {
-            id: that.$route.query.id,
+            id: this.$route.query.id,
           })
           .then((res) => {
-            that.componentadata = res.data.extra[0];
-            console.log(that.componentadata);
-             let data = JSON.parse(that.componentadata.dargjsondata)
-         
-             this.gettopoEditor(data)
-          
-            that.handleClick(res.data.extra[0]);
+            this.componentadata = res.data.extra[0];
+             let data = JSON.parse(this.componentadata.dargjsondata)
+             this.getfacility(data.name)
+             console.log('data.name'+data.name);
+             this.gettopoDataname(data.name)
+            this.handleClick(res.data.extra[0]);
           });
       }
     },
+    // 获取传感器
+    getfacility(){
+
+    }
   },
   mounted() {
     this.usershownamelist();
-
     this.draglistid();
-
     this.isname = this.topoDatademo;
     this.loadDefaultTopoData();
   },
@@ -892,22 +891,22 @@ export default {
     // background-repeat: no-repeat;
     // background-size: 100% 100%;
 
-    background-image: linear-gradient(
-        45deg,
-        #ccc 25%,
-        transparent 25%,
-        transparent 75%,
-        #ccc 75%,
-        #ccc
-      ),
-      linear-gradient(
-        45deg,
-        #ccc 25%,
-        transparent 25%,
-        transparent 75%,
-        #ccc 75%,
-        #ccc
-      );
+    // background-image: linear-gradient(
+    //     45deg,
+    //     #ccc 25%,
+    //     transparent 25%,
+    //     transparent 75%,
+    //     #ccc 75%,
+    //     #ccc
+    //   ),
+    //   linear-gradient(
+    //     45deg,
+    //     #ccc 25%,
+    //     transparent 25%,
+    //     transparent 75%,
+    //     #ccc 75%,
+    //     #ccc
+    //   );
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
 

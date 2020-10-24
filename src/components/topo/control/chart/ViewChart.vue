@@ -12,7 +12,9 @@ export default {
   props: {},
   watch: {
     detail: function (newVal) {
-       console.log(this.detail.position.dataLine)
+      console.log(this.detail);
+       console.log('this.detail===============');
+      console.log(this.detail.position.dataLine)
       this.setOption(this.option);
     },
    
@@ -96,7 +98,7 @@ export default {
   mounted() {
       console.log(this.detail.position.dataLine)
        console.log(' console.log(this.detail)')
-       
+
     this.$nextTick(function () {
       this.setOption(this.option);
     });

@@ -29,5 +29,9 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
+  const originalPush = VueRouter.prototype.push
+  VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+  }
   return Router
 }

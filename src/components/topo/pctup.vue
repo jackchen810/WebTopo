@@ -110,10 +110,10 @@ export default {
         
       },
   mounted: function () {
-    
     this.form.projectname = this.topoData.name
     this.form.user_account = localStorage.getItem("user_account");
-    this.form.dargjsondata = JSON.stringify( this.topoData);
+    console.log(this.topoData);
+    this.form.dargjsondata = JSON.stringify(this.topoData);
   },
   methods: {
     ...mapMutations("topoEditor", ["gettopoEditor"]),

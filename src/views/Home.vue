@@ -1,23 +1,27 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="drawer = !drawer" />
 
-        <q-toolbar-title>金大万翔物联网管理平台</q-toolbar-title>
+
+ 
+    <q-layout view="hHh Lpr lff" container  class="shadow-2 rounded-borders"  style="height: 100%;">
+      <q-header elevated class="bg-black">
+        <q-toolbar>
+          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+         <q-toolbar-title>金大万翔物联网管理平台 </q-toolbar-title>
 
         <q-chip>
           <q-avatar>
             <img src="../assets/img/tt.png" />
           </q-avatar>
-       
           {{username}}
+         
         </q-chip>
         <q-btn class="exit" color="primary" size="xm" round icon="exit_to_app" title="退出" @click="exitchange" />
-      </q-toolbar>
-    </q-header>
+        </q-toolbar>
+      </q-header>
 
-    <q-drawer
+
+
+    <!-- <q-drawer
       v-model="drawer"
       show-if-above
       :width="200"
@@ -26,50 +30,69 @@
       content-class="bg-grey-3"
     >
       <q-scroll-area class="fit">
-        <q-list v-for="(menuItem, index) in menuList" :key="index">
-          <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple @click="menuItemclick(index)">
-            <q-item-section avatar>
-              <q-icon :name="menuItem.icon" />
-            </q-item-section>
-            <q-item-section>{{ menuItem.label }}</q-item-section>
-          </q-item>
-
-          <q-separator v-if="menuItem.separator" />
-        </q-list>
+      
+        <Qmenu></Qmenu>
       </q-scroll-area>
     </q-drawer>
+   -->
+   <q-drawer
+        v-model="drawer"
+        show-if-above
 
-    <q-page-container>
+        :mini="miniState"
+        @mouseover="miniState = false"
+        @mouseout="miniState = true"
+
+        :width="200"
+        :breakpoint="500"
+        bordered
+        content-class="bg-grey-3"
+      >
+        <q-scroll-area class="fit">
+          <Qmenu></Qmenu>
+        </q-scroll-area>
+      </q-drawer>
+
+
+
+
+    <q-page-container  >
       <router-view />
     </q-page-container>
-
-    <q-footer elevated class="bg-grey-8 text-white">
+   <div id="content"></div> 
+           <div id="verticalRuler"></div>
+            <div id="levelRuler"></div>
+         <!-- content 不能删  -->
+    <!-- <q-footer elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
-          <!-- <q-avatar>
+          <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
-          </q-avatar>-->
+          </q-avatar>
           金大万翔物联网管理平台
            <div id="content"></div> 
            <div id="verticalRuler"></div>
             <div id="levelRuler"></div>
-            <!--content 不能删 -->
+         content 不能删 
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
   </q-layout>
+
 </template>
 
 <script>
 
-import { mapState, mapMutations, mapAction } from "vuex";
+import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 
 import Projectmanage from "./Projectmanage";
+import Qmenu from "./Qmenu";
 
 export default {
   name:'Home',
   components: {
     Projectmanage,
+    Qmenu
   },
   computed: {
       userDatalist: (state) => state.example.userDatalist,
@@ -77,46 +100,27 @@ export default {
   data() {
     return {
       drawer: false,
-      userAccount: this.$store.state.example.userAccount, //用data接收
-      menuList: [
-        {
-          icon: "inbox",
-          label: "项目管理",
-          separator: true,
-        },
-        {
-          icon: "send",
-          label: "用户中心",
-          separator: false,
-        },
-      ],
       username: "",
-      tabledata:[]
+      tabledata:[],
+      configObjectName:'',
+      drawer: false,
+      miniState: true,
+     
     };
   },
   methods: {
     ...mapMutations("example", [
       "getuserDatalist",
-   ,
+      'getProjectnametlist',
+      'ProjectFacility'
     ]),
+    
     exitchange(){
       localStorage.removeItem("user_type");
       localStorage.removeItem("user_account");
       this.$router.push("/");
     },
-    menuItemclick(val){
-      console.log(val);
-      switch (val) {
-        case 0:
-          this.$router.push("/Projectmanage");
-          break;
-       case 1:
-          this.$router.push("/usermanage");
-          break;
-        default:
-          break;
-      }
-    },
+  
     async userlist(cpage){
        let username = localStorage.getItem('user_account')
       this.current_page = cpage ? cpage: this.current_page
@@ -134,18 +138,69 @@ export default {
             }
       )
     },
+    async list_pct_name(){
+        await this.$axios.post('/api/admin/list',{
+        user_account : localStorage.getItem('user_account')
+      }).then(res=>{
+        if(res.data.ret_code == 0){
+          this.configObjectName = res.data.extra[0].user_projects
+          this.getProjectnametlist(this.configObjectName)
+          this.pctlist()
+         
+        }
+      })
+    },
+     async pctlist(){
+       let that  =this
+          let params = {
+                      filter: {project_name: { $in: this.configObjectName}}
+                    };
+                await this.$axios.post('/api/devunit/manage/list',params).then(function(res){
+                    if(res.data.ret_code == 0){
+                      that.ProjectFacility(res.data.extra)
+
+                    }   
+               })
+    }
 
   },
   mounted() {
     this.userlist()
+
+    this.list_pct_name()
     this.username = localStorage.getItem('user_account')
- 
+    // let count = 0;
+
+    //         let ws = new WebSocket('ws://localhost:3301');
+            
+    //         ws.onopen = function () {
+    //             console.log(`[CLIENT] open()`);
+    //             ws.send('Hello!');
+    //         }
+    //         //接受信息
+
+    //         ws.onmessage = function (message) {
+    //             const backMsg = JSON.parse(message.data);
+    //             console.log(backMsg)
+    //             console.log(`[CLIENT] Received: ${backMsg}`);
+    //             count++;
+    //             if (count > 20) {
+    //                 ws.send('Goodbye!');
+    //                 ws.close();
+    //             } else {
+    //                 setTimeout(() => {
+    //                     ws.send(`Hello, I'm Mr No.${count}!`);
+    //                 }, 1000);
+    //             }
+    //}
   },
 };
 </script>
-<style scoped>
+<style >
+
 .exit {
   margin: 0 5px 0 20px;
 }
+.fit{ background: #000; color: #fff;}
 </style>
  

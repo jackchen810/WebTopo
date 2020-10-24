@@ -1,6 +1,16 @@
 <template>
+
   <div class="login-wrap">
-    <el-form :model="formA" :rules="rules" ref="formA">
+      <q-card>
+        <q-card-section class="row items-center q-pb-none btnicon">
+          <div class="text-h6">用户注册</div>
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup  />
+        </q-card-section>
+
+        <q-card-section>
+
+              <el-form :model="formA" :rules="rules" ref="formA">
       <el-form-item
         label="账号"
         prop="project_showname"
@@ -71,16 +81,26 @@
         ></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="saveCreate('formA')">创 建</el-button>
-    </div>
+    <el-button type="primary" @click="saveCreate('formA')">创 建</el-button>
+ <!-- <div slot="footer" class="dialog-footer">
+      
+    </div> -->
+
+        </q-card-section>
+      </q-card>
+
+
+  
+   
   </div>
+  
 </template>
 
 <script>
 import axios from "axios";
 import global_ from "../assets/libs/Global.js";
 export default {
+    props: ["alert"],
   data: function () {
     return {
       formA: {
@@ -115,6 +135,7 @@ export default {
       citys: [],
       fileList: [],
       search_word: "",
+     
     };
   },
   created: function () {
@@ -190,6 +211,7 @@ export default {
 </script>
 
 <style scoped>
+form{padding: 0 20px 0 0;}
 .ms-title {
   text-align: center;
   font-size: 30px;
@@ -208,5 +230,10 @@ export default {
 .login-btn button {
   width: 100%;
   height: 36px;
+}
+.btnicon .q-btn{
+   position:absolute;
+   top:0;
+   right:0;
 }
 </style>

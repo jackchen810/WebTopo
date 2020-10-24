@@ -139,7 +139,7 @@ export const redo = function(state) {
  * @param {*} component 
  */
 export const setSelectedComponent = (state,component) => {   
-    console.log(state) 
+    // console.log(state) 
     var fuid = uid;
     if(!component.identifier) {
         component.identifier = fuid();
@@ -236,15 +236,24 @@ export const gettopoEditor = (state,itemsv) =>{
     state.topoData = itemsv
 }
 
+// 保存项目名
+export const gettopoDataname = (state,itemsv) =>{
+  
+    state.topoData.name = itemsv
+    console.log( state.topoData);
+}
+
+
+
 
 
 
 export const buttomupdata = (state,itemsve) => {
-    console.log(state)
+  
     state.topoData.components.map((item,i) =>{
         if( item.identifier == itemsve.identifier){
             state.topoData.components[i].style.url = itemsve.url
-            state.topoData.components[i].dataBind.queryParam.isclick = itemsve.isclick
+            state.topoData.components[i].buttomupdata.isclick = itemsve.isclick
         } 
     }) 
     // command.style.url = itemsv.url

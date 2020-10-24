@@ -56,10 +56,10 @@ export default {
                 _this.onResize();                
             });
             //这里模拟服务器发送消息
-            setInterval(() => {
-                this.SimpleEventBus.emit('first-event', i);
-                i++;
-            }, 500);
+            // setInterval(() => {
+            //     this.SimpleEventBus.emit('first-event', i);
+            //     i++;
+            // }, 500);
         }
     }
 }

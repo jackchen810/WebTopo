@@ -10,6 +10,7 @@ import ViewLine from './control/canvas/ViewLine';
 import ViewLineArrow from './control/canvas/ViewLineArrow';
 import ViewLineWave from './control/canvas/ViewLineWave';
 import ViewBizierCurveArrow from './control/canvas/ViewBizierCurveArrow';
+import ViewCanvasLines from './control/canvas/ViewCanvasLines';
 import ViewRect from './control/canvas/ViewRect';
 import ViewTriangle from './control/canvas/ViewTriangle';
 
@@ -18,6 +19,8 @@ import ViewChartGauge from './control/chart/ViewChartGauge';
 import ViewChartLines from './control/chart/ViewChartLines';
 import viewChartwatera from './control/chart/viewChartwatera';
 import ViewChartPie from './control/chart/ViewChartPie';
+
+import ViewWebRecord from './control/web/Record';
 
 
 import ViewSvgImage from './control/svg/ViewSvgImage';
@@ -42,7 +45,9 @@ export default {
         ViewChartGauge,
         ViewSvgImage,
         ViewSvgStatic,
-        viewChartwatera
+        viewChartwatera,
+        ViewCanvasLines,
+        ViewWebRecord,
     },
 }
 </script>

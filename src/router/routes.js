@@ -28,6 +28,11 @@ const routes = [
         //name: '/',
         component: resolve => require(['../views/usermanage'], resolve)
     },
+    {
+      path: '/Facility',
+      //name: '/',
+      component: resolve => require(['../views/Facility'], resolve)
+  },
     ]
   },
   {

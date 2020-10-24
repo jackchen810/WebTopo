@@ -77,8 +77,11 @@ export default {
   },
   created () {
     // 默认首次就触发事件
-    this.$emit('pageChange', this.pagination.limit, this.pagination.offset)
-    console.log('ddddd');
+    if(!this.isboolean){
+      this.$emit('pageChange', this.pagination.limit, this.pagination.offset)
+    }
+  
+  
   },
   computed: {
     page: {
@@ -120,14 +123,17 @@ export default {
     emitEvent: {
       required: true,
       default: false
-    }
+    },
+    isboolean: {
+      required: false,
+    },
   }
 }
 </script>
 <style  scoped>
     .bottomstyle{
-        position:absolute;
-        bottom:80px;
+        position: fixed;
+        bottom:0px;
         right: 50px;
     }
 </style>

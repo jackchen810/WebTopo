@@ -305,5 +305,86 @@
             }
         }
     }
+    ,{
+        "text": "蔬菜",
+        "icon": "stop",
+        "isFontIcon": true,
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 200,
+                    "h": 200
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/sc01.svg"
+            }
+        }
+        
+    }
+    ,{
+        "text": "蔬菜2",
+        "icon": "stop",
+        "isFontIcon": true,
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 200,
+                    "h": 200
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/sc02.svg"
+            }
+        }
+        
+    }
+    ,{
+        "text": "过滤网",
+        "icon": "stop",
+        "isFontIcon": true,
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 200,
+                    "h": 200
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/r001.svg"
+            }
+        }
+        
+    }
 ]
 }

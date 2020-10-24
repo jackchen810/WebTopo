@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div  style="padding: 10px 0 0 20px" class="main_div">
+    <h6 class="h6"><i class="el-icon-edit"></i>设置</h6>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="活动名称">
         <el-input v-model="form.name"></el-input>
@@ -92,3 +93,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+h6{ margin: 5px;}
+  .main_div{ background: #fff; height: 400px;}
+  .el-form{ padding: 0 50px 0 30px;}
+</style>

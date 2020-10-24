@@ -1,8 +1,6 @@
 
 // Configuration for your app
 const path = require('path')
-
-
 function rootPath (dir) {
   return path.join(__dirname, '.', dir)
 }
@@ -69,6 +67,13 @@ module.exports = function (ctx) {
           pathRewrite: {
             '^/api': '/api' // 需要api
           }
+          // ,
+          // '/socket/**': {
+          //   target: 'wss://localhost',
+          //   ws: true,
+          //   secure: false,
+          //   logLevel: 'debug'
+          // }
         }
       }
     },
@@ -115,7 +120,9 @@ module.exports = function (ctx) {
         'QUploader',
         'QChip',
         'QSpace',
-        'QField'
+        'QField',
+        'QDate',
+        'QTime'
       ],
       directives: [
         'Ripple',

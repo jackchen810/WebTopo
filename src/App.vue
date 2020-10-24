@@ -14,4 +14,9 @@ export default {
 #q-app{
   height: 100vh;
 }
+html,body,#app{
+
+ height: 100%;
+
+}
 </style>

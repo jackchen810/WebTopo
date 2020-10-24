@@ -5,7 +5,7 @@
 <script>
 // import echarts from "echarts";
 import BaseView from "../View";
-import echarts from "echarts/lib/echarts"
+import echarts from "echarts";
 import 'echarts-liquidfill'
 export default {
   name: "viewChartwatera",
@@ -21,10 +21,9 @@ export default {
   },
   data() {
     return {
+      
       echart: null,
       option: {
-        
-       
         series: [
           {
             name: "水球图",
@@ -37,7 +36,7 @@ export default {
             let:'5%',
             right:'5%',
             bottom:20,
-            data: [0.6, 0.6 - 1 / 10],
+            data: [0.6],
             itemStyle: {
               //渐变色设置
               normal: {
@@ -109,6 +108,7 @@ export default {
           },
         ],
       },
+      
     };
   },
   methods: {
@@ -122,7 +122,7 @@ export default {
     },
     onResize() {
       if (this.echart) {
-        console.log(this.$refs.chartView);
+        // console.log(this.$refs.chartView);
         this.echart.resize();
       }
     },
@@ -131,10 +131,14 @@ export default {
     },
   },
   mounted() {
+  // let arr =  this.detail.dataBind
+   this.detail.dataBind.chartwatera = this.waterData
+  // arr.chartwatera = 'chartwatera'
+    // console.log(this.detail);
     // console.log(this.$store.state.topoEditor.topoData.components[9].style.position.h);
-    this.$nextTick(function () {
-      this.setOption(this.option);
-    });
+    // this.$nextTick(function () {
+     this.setOption(this.option);
+    // });
   },
 };
 </script>

@@ -9,21 +9,23 @@ topoUtil.viewRegisterMap = {
   "line-arrow": "view-line-arrow",
   "chart-line": "view-chart",
   "chart-lines": "view-chart-lines",
+  "canvas-lines": "view-canvas-lines",
   "chart-line-step": "view-chart",
   "chart-bar": "view-chart",
   "chart-pie": "view-chart-pie",
   "chart-gauge": "view-chart-gauge",
   "chart-watera": "view-chartwatera",
   "buttom":"view-buttom",
+  "web-record": "view-web-record",
 };
 
 //优先匹配map，否则将自动匹配
 topoUtil.parseViewName = function (component) {
   // console.log('优先匹配map，否则将自动匹配')
-  // console.log(component)
+
   var viewName = topoUtil.viewRegisterMap[component.type];
   if(viewName == undefined) {
-    console.info(`没有手动配置组件映射，将根据数据的type自动匹配，当前组件类型=${component.type}`);    
+    // console.info(`没有手动配置组件映射，将根据数据的type自动匹配，当前组件类型=${component.type}`);    
     viewName = "view-" + component.type;
   }
   return viewName;
@@ -47,5 +49,9 @@ topoUtil.parseEchartType = function (component, option) {
     option.series[0].step = 'start';
   }
 }
-
+// topoUtil.componentType = (type)=>{
+//     if(type == 'buttom'){
+       
+//     }
+// }
 export default topoUtil;

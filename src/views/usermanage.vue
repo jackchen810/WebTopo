@@ -10,6 +10,7 @@
         <q-breadcrumbs-el label="用户中心" icon="widgets" />
         <!-- <q-breadcrumbs-el label="管理中心"" icon="navigation" /> -->
       </q-breadcrumbs>
+     
       <q-btn color="primary" label="新建测试用户" @click="alert = true" />
       <Usertable
         :tabledata="tabledata"
@@ -18,9 +19,9 @@
         @delClick="delClick"
       ></Usertable>
     </div>
-    <el-dialog title="用户注册" :visible.sync="alert" width="30%" center>
+    <q-dialog title="用户注册" v-model="alert" :content-style="{ width: '50%' }" center>
       <Register @closeDialog="closedialog"></Register>
-    </el-dialog>
+    </q-dialog>
   </div>
 </template>
 <script>

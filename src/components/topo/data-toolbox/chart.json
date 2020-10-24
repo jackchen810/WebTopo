@@ -128,35 +128,11 @@
         }
       }
     },
+   
     {
-      "text": "lines",
-      "icon": "av_timer",
-      "isFontIcon": true,
-      "info": {
-        "type": "chart-lines",
-        "action": [],
-        "dataBind": {
-          "sn": "",
-          "title": "",
-          "biz": "",
-          "queryParam": {}
-        },
-        "style": {
-          "position": {
-            "x": 0,
-            "y": 0,
-            "w": 300,
-            "h": 300
-          },
-          "backColor": " ",
-          "zIndex": 1
-        }
-      }
-    },
-    {
-      "text": "watera",
-      "icon": "av_timer",
-      "isFontIcon": true,
+      "text": "",
+      "icon": "statics/img/s01.png",
+     
       "info": {
         "type": "chart-watera",
         "action": [],
@@ -178,5 +154,6 @@
         }
       }
     }
+    
   ]
 }

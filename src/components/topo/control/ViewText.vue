@@ -7,6 +7,7 @@
         lineHeight: lineHeight + 'px',
     }">
     {{detail.style.text}}
+    <span class="unit" >{{sensor_unit}}</span>
 </div>
 </template>
 
@@ -17,16 +18,22 @@ import BaseView from './View';
 export default {
     name: 'view-text',
     extends: BaseView,
-    props: {
-        
-    },    
-    data() {
+    props: ['detail'],
+    watch:{
+       
+    },
+    data(){
         return {
-            
+            sensor_unit:this.detail.dataBind.queryParam.sensor_unit,
         }
     },
     methods: {
-        
+    },
+    mounted(){
+       
+        //   if( isNaN(this.detail.style.text) == true){
+        //        console.log(this.detail.style.text);
+        //   }
     }
 }
 </script>
@@ -36,4 +43,5 @@ export default {
     height: 100%;
     width: 100%;
 }
+.unit{ font-size: 14px;}
 </style>
