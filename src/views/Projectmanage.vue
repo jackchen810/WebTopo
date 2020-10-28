@@ -32,6 +32,7 @@
             <q-btn flat color="primary" @click="delClick(item)" label="删除" />
           </q-card-section>
         </q-card>
+      
       </div>
       
       <CPagination :count="count" :emitEvent="emitEvent" @pageChange="pageChange"  ></CPagination>
@@ -96,13 +97,24 @@ export default {
           current_page: offset,
         })
         .then((res) => {
-          that.componentdata = res.data.extra;
+          that.componentdata = this.getcomponentdataImg(res.data.extra) 
+
           this.count = res.data.total;
         });
       // this.this.configData =
     },
     getpaginationtal(val) {
       //   this.getData(val);
+    },
+    // 图片路径转换
+    getcomponentdataImg(data){
+    data.map(item=>{
+           let imgUrl = String.raw `${item.project_image}`
+          // console.log("http://"+window.location.hostname+ imgUrl.split('').slice(16).toString().replace(/,/g, ""));
+          item.project_image ="http://"+ window.location.hostname + imgUrl.split('').slice(16).toString().replace(/,/g, "")
+        
+      })
+      return data
     },
     handleClick(val) {
       this.$router.push({

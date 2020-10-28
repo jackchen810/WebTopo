@@ -4,7 +4,7 @@
       <el-form-item label="上传" :label-width="formLabelWidth">
         <el-upload
           :class="{ hide: hideUpload }"
-          action="api/drag/imgadd"
+          action="/api/drag/imgadd"
           ref="upload"
           list-type="picture-card"
           :on-success="handleAvatarSuccess"
@@ -81,7 +81,7 @@ export default {
    },
   data() {
     return {
-      uploadUrl: "http://localhost//api/drag/imgadd",
+      uploadUrl: "/api/drag/imgadd",
       dialogFormVisible: false,
       form: {
         file_name: "",
@@ -128,6 +128,10 @@ export default {
     this.form.comment = this.componentadata.comment;
     this.fileList[0].name = "图片";
     this.fileList[0].url = this.componentadata.project_image;
+     let imgUrl = String.raw `${ this.componentadata.project_image}`
+          // console.log("http://"+window.location.hostname+ imgUrl.split('').slice(16).toString().replace(/,/g, ""));
+   this.fileList[0].url ="http://"+ window.location.hostname + imgUrl.split('').slice(16).toString().replace(/,/g, "")
+  
    
   },
   methods: {
@@ -161,6 +165,7 @@ export default {
         });
     },
     onchange() {
+      
       this.hideUpload = true;
     },
     handleAvatarSuccess(res, file) {
@@ -182,6 +187,8 @@ export default {
       console.log("shang");
       this.hideUpload = false;
     },
+    
+
   },
 };
 </script>

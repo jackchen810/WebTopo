@@ -620,7 +620,7 @@ export default {
         };
         let self = this;
         await this.$axios
-          .post("api/gateway/minute1/list", params)
+          .post("/api/gateway/minute1/list", params)
           .then(function (res) {
             component.position.xdata = res.data.extra.timeList;
             component.position.dataLine = res.data.extra.dataList;

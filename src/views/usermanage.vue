@@ -95,7 +95,7 @@ export default {
             .then((res) => {
               if (res.data.total == 0) {
                 self.$axios
-                  .post("api/admin/delete", { user_account:  val.user_account })
+                  .post("/api/admin/delete", { user_account:  val.user_account })
                   .then(function (res) {
                     if (res.data.ret_code == 0) {
                       self.userlist()

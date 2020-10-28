@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TopoRender from "@/components/topo/TopoRender";
+import TopoRender from "../../components/topo/TopoRender";
 export default {
   name: "TopoFullscreen",
   data() {
@@ -29,12 +29,10 @@ export default {
       await this.$axios
         .post("/api/devunit/manage/list", {project_name: pctname })
         .then((res) => {
-         
           let arr = [];
           this.deviceList = res.data.extra;
           res.data.extra.map((item) => {
             arr.push(item.devunit_name);
-             
           });
           this.facility_devunit_list = arr;
           this.getFacilitydata(arr);

@@ -76,7 +76,7 @@ export default {
     // console.log(this.topoData);
 
     this.$axios
-      .post("api/sensor/list", { pct_name: this.topoDataname })
+      .post("/api/sensor/list", { pct_name: this.topoDataname })
       .then((res) => {
         console.log(res.data.extra);
         this.faclicitydata = res.data.extra;

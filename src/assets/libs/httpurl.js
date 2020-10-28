@@ -1,2 +1,2 @@
-const httprul = 'http://localhost:9090' 
+const httprul = 'http://datav.jdwanxiang.com/webtopo/#' 
 export default  httprul

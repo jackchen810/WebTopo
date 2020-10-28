@@ -62,21 +62,7 @@
    <div id="content"></div> 
            <div id="verticalRuler"></div>
             <div id="levelRuler"></div>
-         <!-- content 不能删  -->
-    <!-- <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
-          </q-avatar>
-          金大万翔物联网管理平台
-           <div id="content"></div> 
-           <div id="verticalRuler"></div>
-            <div id="levelRuler"></div>
-         content 不能删 
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer> -->
+    
   </q-layout>
 
 </template>
@@ -139,11 +125,11 @@ export default {
       )
     },
     async list_pct_name(){
-        await this.$axios.post('/api/admin/list',{
+        await this.$axios.post('/api/admin/get/own/project',{
         user_account : localStorage.getItem('user_account')
       }).then(res=>{
         if(res.data.ret_code == 0){
-          this.configObjectName = res.data.extra[0].user_projects
+          this.configObjectName = res.data.extra
           this.getProjectnametlist(this.configObjectName)
           this.pctlist()
          
@@ -169,30 +155,7 @@ export default {
 
     this.list_pct_name()
     this.username = localStorage.getItem('user_account')
-    // let count = 0;
-
-    //         let ws = new WebSocket('ws://localhost:3301');
-            
-    //         ws.onopen = function () {
-    //             console.log(`[CLIENT] open()`);
-    //             ws.send('Hello!');
-    //         }
-    //         //接受信息
-
-    //         ws.onmessage = function (message) {
-    //             const backMsg = JSON.parse(message.data);
-    //             console.log(backMsg)
-    //             console.log(`[CLIENT] Received: ${backMsg}`);
-    //             count++;
-    //             if (count > 20) {
-    //                 ws.send('Goodbye!');
-    //                 ws.close();
-    //             } else {
-    //                 setTimeout(() => {
-    //                     ws.send(`Hello, I'm Mr No.${count}!`);
-    //                 }, 1000);
-    //             }
-    //}
+  
   },
 };
 </script>

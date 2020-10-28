@@ -8,8 +8,8 @@
 import echarts from "echarts";
 import moment from 'moment';
 
-import optionMap from '@/assets/data/chart-map.json';
-import geoJson from '@/assets/echarts-map-json/province/henan.json';
+import optionMap from '../../assets/data/chart-map.json';
+import geoJson from '../../assets/echarts-map-json/province/henan.json';
 
 export default {
     name: "ChartMapView",

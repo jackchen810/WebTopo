@@ -46,7 +46,6 @@ export default {
         if(this.editMode == false) {
             var _this = this;
             var i = 0;
-            debugger
             this.SimpleEventBus.on("first-event",function(msg){
                 if(msg % 2) {
                     _this.detail.style.foreColor = "blue";

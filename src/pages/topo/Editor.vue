@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import WresizePanel3 from '@/components/panel/WresizePanel3';
+import WresizePanel3 from '../../components/panel/WresizePanel3';
 
-import TopoToolbox from '@/components/topo/TopoToolbox';
-import TopoMain from '@/components/topo/TopoMain';
-import TopoProperties from '@/components/topo/TopoProperties';
+import TopoToolbox from '../../components/topo/TopoToolbox';
+import TopoMain from '../../components/topo/TopoMain';
+import TopoProperties from '../../components/topo/TopoProperties';
 
 export default {
     name: 'TopoEditor',

@@ -179,7 +179,7 @@ export default {
           user_city: self.formA.user_city,
           user_detail: self.formA.user_detail,
         };
-        self.$axios.post("api/admin/register", params).then(function (res) {
+        self.$axios.post("/api/admin/register", params).then(function (res) {
           if (res.data.ret_code == 1001) {
             self.$message({ message: res.data.ret_msg, type: "warning" });
             setTimeout(function () {

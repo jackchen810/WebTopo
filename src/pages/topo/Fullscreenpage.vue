@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import TopoRenderpage from "@/components/topo/TopoRenderpage";
+import TopoRenderpage from "../../components/topo/TopoRenderpage";
 import crypto from "crypto";
 import Login from "../../views/Login.vue";
 import { log } from "util";
@@ -74,7 +74,6 @@ export default {
       return md5Value;
     },
     async clicklogin() {
-      console.log("提交");
       await this.$axios
         .post("/api/admin/login", {
           user_account: this.username,
@@ -82,9 +81,9 @@ export default {
         })
         .then((res) => {
           if (res.data.ret_code === 0) {
-            localStorage.setItem("user_type", "3");
+         
             this.username = this.username;
-            localStorage.setItem("user_account", this.username);
+          
             this.prompt = false;
           } else {
             this.$message.error(res.data.ret_msg);
@@ -120,15 +119,13 @@ export default {
           id: that.$route.query.id,
         })
         .then((res) => {
-          // console.log(res.data.extra[0].dargjsondata);
-          if (
-            res.data.extra[0].project_showname ==localStorage.getItem("user_account")
-          ) {
+          console.log(res);
+          if ( res.data.extra[0].project_showname == this.username){
             that.temp = res.data.extra[0].dargjsondata;
             localStorage.getItem("topoData", JSON.parse(this.temp));
             this.configData = JSON.parse(res.data.extra[0].dargjsondata);
-         
-          } else {
+          }
+          else{
             this.$message({
               message: "无权限",
               type: "warning",
@@ -139,16 +136,15 @@ export default {
   },
 
   mounted() {
-    console.log("提交");
+  
       let that = this;
       
       
     setInterval(function () {
-        console.log("dd");
         that.getFacilityDevunit(that.temp.name);
       }, 60000);
   },
-};
+}
 </script>
 
 <style lang="scss">

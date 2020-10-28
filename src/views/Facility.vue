@@ -59,7 +59,7 @@
           </div>
         </div>
         <Facilitytable
-          :pct-facility="pctFacility"
+          :pctFacility="pctFacility"
           :Facilitydata="Facilitydata"
           @delFacility="delFacility"
           @saveCreate="saveCreate"
@@ -76,8 +76,8 @@
     </div>
     <q-dialog title="新增传感器" v-model="alert" center>
       <Getsensor
-        :pct-facility="pctFacility"
-        :faciltity-adata="faciltityAdata"
+        :pctFacility="pctFacility"
+        :faciltityAdata="faciltityAdata"
         @saveCreate="saveCreate"
       ></Getsensor>
     </q-dialog>

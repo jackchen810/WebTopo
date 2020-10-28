@@ -1,6 +1,7 @@
 <template>
   <div class="login-wrap">
     <q-card>
+   
       <q-card-section class="row items-center q-pb-none btnicon">
         <div class="text-h6">{{dialogtitle}}</div>
         <q-space />
@@ -8,6 +9,8 @@
       </q-card-section>
 
       <q-card-section>
+        
+      
         <el-form :model="sensorForm" :rules="rules"  ref="sensorForm">
           <el-form-item
             label="设备名"
@@ -15,7 +18,7 @@
             :label-width="formLabelWidth"
           >
             <el-select v-model="sensorForm.faval" placeholder="请选择">
-              <el-option
+                <el-option
                 v-for="item in pctFacility"
                 :key="item._id"
                 :label="item.dev_cn_name"
@@ -33,17 +36,18 @@
 
           <el-form-item
             label="传感器类型"
-          prop="sensor_vaule"
+            prop="sensor_vaule"
             :label-width="formLabelWidth"
           >
-            <el-select v-model="sensorForm.sensor_vaule" placeholder="请选择">
-              <el-option
+          <el-select v-model="sensorForm.sensor_vaule" placeholder="请选择">
+            <el-option
                 v-for="item in sensor_type"
                 :key="item"
                 :label="item"
                 :value="item"
               ></el-option>
-            </el-select>
+          </el-select>
+            <!-- <q-select filled v-model="sensorForm.sensor_vaule" :options="sensor_type"  /> -->
           </el-form-item>
           <el-form-item
             label="传感器型号"
@@ -64,17 +68,12 @@
            <span v-if="this.faciltityAdata._id">修改</span>
              <span  v-else>创 建</span>
            </el-button>
-      
-        
-        <!-- <div slot="footer" class="dialog-footer">
-      
-    </div> -->
       </q-card-section>
     </q-card>
   </div>
 </template>
 <script>
-import datatype from "../assets/libs/datatype";
+import datatype from "../assets/libs/datatype"
 export default {
   props: ["pctFacility","faciltityAdata"],
   data() {
@@ -82,6 +81,7 @@ export default {
       dialogtitle:'新增传感器',
       formLabelWidth: "120px",
       sensor_type: datatype.sensortype,
+     
       sensorForm: {
         sensor_name: "",
         sensor_No: "",
@@ -109,8 +109,13 @@ export default {
       },
     };
   },
+  watch:{
+   
+  },
   mounted() {
-    console.log(this.faciltityAdata);
+    
+    console.log(this.sensor_type)
+    console.log(this.pctFacility);
     if(this.faciltityAdata._id){
       this.dialogtitle = '编辑传感器'
       this.sensorForm.sensor_name = this.faciltityAdata.sensor_name
@@ -119,7 +124,7 @@ export default {
         this.sensorForm.faval = this.faciltityAdata.sensor_facility
           this.sensorForm.sensor_unit = this.faciltityAdata.sensor_unit
     }else{
-        console.log("无");
+        console.log("this.faciltityAdata无数据");
     }
   },
   methods: {
@@ -147,16 +152,17 @@ export default {
   },
 };
 </script>
-<style  scoped>
-.btnicon .q-btn {
+<style>
+.login-wrap .btnicon .q-btn {
   position: absolute;
   top: 0;
   right: 0;
 }
-.el-form {
+.login-wrap .el-form {
   padding: 20px 40px 0 0;
 }
-.q-card {
+.login-wrap .q-card {
   text-align: center;
 }
+.fullscreen{ z-index: 2000 ;}
 </style>

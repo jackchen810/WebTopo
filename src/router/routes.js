@@ -1,7 +1,7 @@
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-import Fullscreen from '../pages/topo/Fullscreen'
-import Fullscreenpage from '../pages/topo/Fullscreenpage'
+// import Fullscreen from '../pages/topo/Fullscreen'
+// import Fullscreenpage from '../pages/topo/Fullscreenpage'
 const routes = [
   {
     path: '/',
@@ -45,19 +45,19 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/Fullscreen',
-    name: 'Fullscreen',
-    component: Fullscreen
-  },
+  // {
+  //   path: '/Fullscreen',
+  //   name: 'Fullscreen',
+  //   component: () => import('pages/topo/Fullscreen'),
+  // },
   {
     path: '/Fullscreenpage',
     name: 'Fullscreenpage',
-    component: Fullscreenpage
+    component: () => import('pages/topo/Fullscreenpage'),
   },
-  // {
-  //   path: '/fullscreen', name: 'TopoFullscreen',component: () => import('pages/topo/Fullscreen.vue')
-  // }
+  {
+    path: '/Fullscreen', name: 'Fullscreen',component: () => import('pages/topo/Fullscreen.vue')
+  }
 ]
 
 // Always leave this as last one

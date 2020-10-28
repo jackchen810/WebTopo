@@ -261,16 +261,17 @@
 <script>
 import VueRulerTool from "./ruler";
 import TopoBase from "./TopoBase";
-import uid from "@/assets/libs/uid.js";
+import uid from "../../assets/libs/uid.js";
+
 import topoUtil from "./util/topo-util";
-import { deepCopy } from "@/assets/libs/utils";
+import { deepCopy } from "../../assets/libs/utils";
 import Topotable from "./Topotable";
 
 import {
   checkInRange,
   checkByPointInRect,
   checkByRectCollisionDetection,
-} from "@/assets/libs/topo";
+} from "../../assets/libs/topo";
 
 import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 import axios from "axios";
@@ -716,6 +717,9 @@ export default {
     },
     fullScreen() {
       localStorage.setItem("topoData", JSON.stringify(this.configData));
+    
+      // this.$router.push({path: '/Fullscreen'});
+
       let { href } = this.$router.resolve({
         path: "/fullscreen",
         name: "TopoFullscreen",

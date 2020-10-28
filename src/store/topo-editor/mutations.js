@@ -3,10 +3,8 @@ import Vue from 'vue';
 import {
     uid
 } from 'quasar';
-import {
-    deepCopy
-} from "@/assets/libs/utils";
-
+import {deepCopy} from "../../assets/libs/utils"
+    import { Form } from 'element-ui';
 /**
  * 执行编辑命令
  * 注意：这里不要用箭头函数，防止this无法调用
