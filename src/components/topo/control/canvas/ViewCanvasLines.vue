@@ -21,8 +21,8 @@ export default {
   watch: {},
   data() {
     return {
-      winWidth: 280,
-      winHeight: 80,
+      winWidth: 30,
+      winHeight: 280,
       s: 20,
       speed: 20,
       ctx: "",
@@ -35,8 +35,7 @@ export default {
   },
 
   methods: {
-
-    roundRect(ctx, x, y, w, h, r) {
+    roundRect(ctx, y, x, h, w, r) {
       ctx.moveTo(x + r, y);
       // 右上角弧线
       ctx.arcTo(x + w, y, x + w, y + r, r);
@@ -53,36 +52,27 @@ export default {
       this.winWidth = this.detail.style.position.w;
       this.winHeight = this.detail.style.position.h;
       if(!this.stopSet){
-          console.log(this.stopSet);
       }
-       clearInterval(this.stopSet)
-
-       var el = this.$refs.elCanvas;
-        el.width = this.winWidth;
+      clearInterval(this.stopSet)
+      var el = this.$refs.elCanvas;
+      el.width = this.winWidth;
       el.height = this.winHeight;
-            var ctx = el.getContext("2d");
-    //  var canvas = document.getElementById("mycanvas");
-     
-      // var ctx = canvas.getContext("2d");
-       this.color = this.getForeColor();
-       console.log( this.color);
-       if(this.color == 'grey'){
-         this.color = 'rgb(115,222,69)'
-       }
+      var ctx = el.getContext("2d");
+      this.color = this.getForeColor();
       ctx.clearRect(0, 0, this.winWidth,  this.winHeight);
       var winWidth = this.winWidth;
       var winHeight = this.winHeight;
       var z = 6; // 等分
-      if (winHeight / winWidth > 0.1) {
+      if (winWidth /winHeight  > 0.1) {
         z = 2;
       }
-      if (winHeight / winWidth > 0.5) {
+      if ( winWidth /winHeight  > 0.5) {
         z = 1;
       }
       let that = this;
-      var Cw = winWidth / (z + 1); //元素宽
+      var Cw = winHeight / (z + 1); //元素宽
       var s = 0; //起点
-      var speed = winWidth / (z + 2) / z; //间距
+      var speed = winHeight / (z + 2) / z; //间距
       this.stopSet  = setInterval(function () {
         ctx.clearRect(0, 0, winWidth, winHeight);
         ctx.beginPath();
@@ -91,10 +81,10 @@ export default {
             that.roundRect(
               ctx,
               (Cw + speed) * i + s,
-              winHeight / 10,
+              winWidth / 10,
               Cw,
-              winHeight * 0.8,
-              (winHeight * 0.8) / 2
+              winWidth * 0.8,
+              (winWidth * 0.8) / 2
             );
           }
         } else {
@@ -103,10 +93,10 @@ export default {
             that.roundRect(
               ctx,
               (Cw + speed) * i + s,
-              winHeight / 10,
+              winWidth / 10,
               Cw,
-              winHeight * 0.8,
-              (winHeight * 0.8) / 2
+              winWidth * 0.8,
+              (winWidth * 0.8) / 2
             );
           }
         }
@@ -114,59 +104,9 @@ export default {
         s = s + speed + 1;
       
       }, 330);
+   
     },
-    getinit(){
-      var canvas = document.getElementById("mycanvas");
-      canvas.width = this.winWidth;
-      canvas.height = this.winHeight;
-      var ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, this.winWidth,  this.winHeight);
-      var winWidth = this.winWidth;
-      var winHeight = this.winHeight;
-      var z = 10; // 等分
-      if (winHeight / winWidth > 0.1) {
-        z = 4;
-      }
-      if (winHeight / winWidth > 0.5) {
-        z = 1;
-      }
-      let that = this;
-      var Cw = winWidth / (z + 1); //元素宽
-      var s = 0; //起点
-      var speed = winWidth / (z + 1) / z; //间距
-      stopSet  = setInterval(function () {
-        ctx.clearRect(0, 0, winWidth, winHeight);
-        ctx.beginPath();
-        if (s < Cw + speed) {
-          for (let i = -1; i < z; i++) {
-            that.roundRect(
-              ctx,
-              (Cw + speed) * i + s,
-              winHeight / 10,
-              Cw,
-              winHeight * 0.8,
-              (winHeight * 0.8) / 2
-            );
-          }
-        } else {
-          s = 0;
-          for (let i = 0; i < z; i++) {
-            that.roundRect(
-              ctx,
-              (Cw + speed) * i + s,
-              winHeight / 10,
-              Cw,
-              winHeight * 0.8,
-              (winHeight * 0.8) / 2
-            );
-          }
-        }
-        ctx.closePath();
-        s = s + speed + 1;
-        console.log(s);
-      }, 130);
-      
-    }
+   
   },
 };
 </script>
@@ -184,5 +124,9 @@ export default {
 #mycanvas {
   border: 1px solid #ccc;
   background-color: cadetblue;
+}
+canvas {
+  border: 1px solid #ccc;
+  background-image: linear-gradient(90deg, #696969,#F5F5F5, #696969);
 }
 </style>

@@ -153,7 +153,33 @@
           "zIndex": 1
         }
       }
+    },
+    {
+      "text": "",
+      "icon": "statics/img/water.png",
+      "info": {
+        "type": "chart-wsquare",
+        "action": [],
+        "dataBind": {
+          "sn": "",
+          "title": "",
+          "biz": "",
+          "queryParam": {}
+        },
+        "style": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "w": 300,
+            "h": 300
+          },
+          "backColor": " ",
+          "zIndex": 1
+        }
+      }
     }
+    
+    
     
   ]
 }

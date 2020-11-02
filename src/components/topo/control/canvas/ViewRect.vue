@@ -14,16 +14,32 @@ export default {
         drawRect(x, y, width, height, radius, color, type) {
             var el = this.$refs.elCanvas;
             var ctx = el.getContext("2d");
+            let w = width
+            let h = height
+            let r = radius
+           
             ctx.beginPath();
-            ctx.moveTo(x, y + radius);
-            ctx.lineTo(x, y + height - radius);
-            ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
-            ctx.lineTo(x + width - radius, y + height);
-            ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
-            ctx.lineTo(x + width, y + radius);
-            ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
-            ctx.lineTo(x + radius, y);
-            ctx.quadraticCurveTo(x, y, x, y + radius);
+
+            ctx.moveTo(x, y);
+            // ctx.lineTo(x, y + height - radius);
+            // ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+            // ctx.lineTo(x + width - radius, y + height);
+            // ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+            // ctx.lineTo(x + width, y + radius);
+            // ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+            // ctx.lineTo(x + radius, y);
+            // ctx.quadraticCurveTo(x, y, x, y + radius);
+             // 右上角弧线
+            ctx.arcTo(x + w, y, x + w, y + r, r);
+            // 右下角弧线
+            ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+            // 左下角弧线
+            ctx.arcTo(x, y + h, x, y + h - r, r);
+            // 左上角弧线
+            ctx.arcTo(x, y, x + r, y, r);
+
+
+
             ctx[type + 'Style'] = color;
             ctx.closePath();
             ctx[type]();

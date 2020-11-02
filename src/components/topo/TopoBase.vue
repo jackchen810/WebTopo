@@ -18,6 +18,7 @@ import ViewChart from './control/chart/ViewChart';
 import ViewChartGauge from './control/chart/ViewChartGauge';
 import ViewChartLines from './control/chart/ViewChartLines';
 import viewChartwatera from './control/chart/viewChartwatera';
+import viewChartWsquare from './control/chart/viewChartWsquare';
 import ViewChartPie from './control/chart/ViewChartPie';
 
 import ViewWebRecord from './control/web/Record';
@@ -48,6 +49,7 @@ export default {
         viewChartwatera,
         ViewCanvasLines,
         ViewWebRecord,
+        viewChartWsquare,
     },
 }
 </script>

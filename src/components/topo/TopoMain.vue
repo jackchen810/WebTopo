@@ -475,10 +475,10 @@ export default {
             break;
         }
         if (this.resizeItem.w + dx > 20) {
-          this.curControl.style.position.w = this.resizeItem.w + dx;
+          this.curControl.style.position.w = parseInt(this.resizeItem.w)+ parseInt(dx);
         }
         if (this.resizeItem.h + dy > 20) {
-          this.curControl.style.position.h = this.resizeItem.h + dy;
+          this.curControl.style.position.h = parseInt(this.resizeItem.h) + parseInt(dy);
         }
         //canvas组件需要重新渲染
         // DOM 还没有更新

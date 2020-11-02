@@ -51,6 +51,53 @@
             
         },
         {
+            "text": "水管-竖",
+            "icon": "statics/img/gdz3.svg",
+         
+            "info": {
+                "type": "canvas-lines",
+                "action": [],
+                "dataBind": {
+                    "sn": "",
+                    "title": "",
+                    "biz": "",
+                    "queryParam": {}
+                },
+                "style": {
+                    "position": {
+                        "x": 100,
+                        "y": 100,
+                        "w": 30,
+                        "h": 300
+                    },
+                    "backColor": "transparent",
+                    "foreColor": "rgb(115,222,69)",
+                    "zIndex": 1,
+                    "transform": 0,
+                    "lineWidth": 2,
+                    "points": [
+                        {
+                            "x": 20,
+                            "y": 20
+                        },
+                        {
+                            "x": 20,
+                            "y": 100
+                        },
+                        {
+                            "x": 200,
+                            "y": 100
+                        },
+                        {
+                            "x": 200,
+                            "y": 20
+                        }
+                    ]
+                }
+            }
+            
+        },
+        {
             "text": "历史数据",
             "icon": "statics/img/historyReport.png",
             "info": {

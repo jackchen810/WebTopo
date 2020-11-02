@@ -15,6 +15,7 @@ topoUtil.viewRegisterMap = {
   "chart-pie": "view-chart-pie",
   "chart-gauge": "view-chart-gauge",
   "chart-watera": "view-chartwatera",
+  "chart-wsquare": "view-chart-wsquare",
   "buttom":"view-buttom",
   "web-record": "view-web-record",
 };

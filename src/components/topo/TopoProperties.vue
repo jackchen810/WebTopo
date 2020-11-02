@@ -209,7 +209,7 @@
                     configObject.style.url != null
                   "
                 >
-                  <td>元素连接地址</td>
+                  <td>图片连接地址</td>
                   <td>
                     <q-input v-model.lazy="configObject.style.url" />
                   </td>
@@ -276,7 +276,7 @@
                   </td>
                 </tr>
                 <tr v-if="configObject.style.radius != undefined">
-                  <td>Radius</td>
+                  <td>圆角</td>
                   <td>
                     <q-input
                       type="number"
@@ -285,7 +285,7 @@
                   </td>
                 </tr>
                 <tr v-if="configObject.style.lineWidth != undefined">
-                  <td>LineWidth</td>
+                  <td>线宽</td>
                   <td>
                     <q-input
                       type="number"
@@ -589,6 +589,21 @@ export default {
         console.log(this.configObject);
         this.factype = this.configObject
       }
+      
+    },
+    'configObject.style.radius': function(){
+     
+        let h = this.configObject.style.position.h/2
+        let w = this.configObject.style.position.w/2
+        let r = this.configObject.style.radius
+        if( r >= w || r >= h){
+            if(w > h){
+              this.configObject.style.radius = h
+            }else{
+              this.configObject.style.radius = w
+            }
+        }
+        
     },
     Projectnametlist: function () {
       this.configObjectName = this.Projectnametlist;
