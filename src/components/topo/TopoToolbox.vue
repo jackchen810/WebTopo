@@ -36,6 +36,11 @@ import jsonChart from './data-toolbox/chart.json';
 import jsonOffice from './data-toolbox/office.json';
 import jsonSvg from './data-toolbox/svg.json';
 import interaction from './data-toolbox/interaction.json';
+import famen from './data-toolbox/famen.json';
+import mada from './data-toolbox/mad.json';
+import zhuangz from './data-toolbox/zhuangz.json';
+import shuibeng from './data-toolbox/shuibeng.json';
+import guandao from './data-toolbox/guandao.json';
 export default {
     name: 'TopoToolbox',
     data() {
@@ -60,7 +65,12 @@ export default {
         this.toolbox.push(jsonChart);
         this.toolbox.push(jsonOffice);
         this.toolbox.push(jsonSvg);  
-         this.toolbox.push(interaction);        
+        this.toolbox.push(interaction);  
+        this.toolbox.push(famen);
+          this.toolbox.push(zhuangz);   
+           this.toolbox.push(shuibeng);   
+             this.toolbox.push(guandao);    
+              this.toolbox.push(mada); 
         // this.toolbox.push(jsonSvgDianli);        
     }
 }

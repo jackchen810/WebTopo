@@ -2,7 +2,7 @@
 <div class="view-image">
     <template v-if="editMode">
         <template v-if="imageURL != ''">
-            <img style="width:100%;height:100%;" :src="detail.style.url" @dragstart.prevent @dragover.prevent @drop.prevent />
+            <img :style="{ width: this.detail.style.position.w + 'px', height:  this.detail.style.position.h + 'px' }" :src="detail.style.url" @dragstart.prevent @dragover.prevent @drop.prevent />
         </template>
         <q-icon v-else name="photo_size_select_actual" size="120px" color="light" />
     </template>
@@ -21,7 +21,9 @@ export default {
 
     },
     computed: {
+        
         imageURL: function () {
+            
             if (this.detail.style.url == undefined || this.detail.style.url == '') {
                 return '';
             } else {
@@ -36,7 +38,10 @@ export default {
         }
     },
     methods: {
-
+      
+    },
+    mounted(){
+         
     }
 
 }

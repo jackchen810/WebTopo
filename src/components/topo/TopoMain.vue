@@ -5,19 +5,19 @@
       :is-scale-revise="true"
       style="width: 100%; height: calc(100% - 40px)"
     >
+
       <div
+       class="topo-layer"  
         tabindex="0"
-        id="surface-edit-layer"
-        class="topo-layer"
-        :class="{ 'topo-layer-view-selected': selectedIsLayer }"
-        :style="layerStyle"
-        @click="onLayerClick($event)"
+       :class="{ 'topo-layer-view-selected': selectedIsLayer }" id="surface-edit-layer"
+         @click="onLayerClick($event)"
+         :style="layerStyle"
+        @dragover.prevent
+        @drop="onDrop"
         @mouseup="onLayerMouseup($event)"
         @mousemove="onLayerMousemove($event)"
         @mousedown="onLayerMousedown($event)"
         @keyup.delete="removeItem()"
-        @dragover.prevent
-        @drop="onDrop"
         @keydown.ctrl.67.stop="copyItem"
         @keydown.ctrl.86.stop="pasteItem"
         @keydown.ctrl.90.stop="undo"
@@ -474,10 +474,10 @@ export default {
             dx = 0;
             break;
         }
-        if (this.resizeItem.w + dx > 20) {
+        if (this.resizeItem.w + dx > 10) { //最小宽度
           this.curControl.style.position.w = parseInt(this.resizeItem.w)+ parseInt(dx);
         }
-        if (this.resizeItem.h + dy > 20) {
+        if (this.resizeItem.h + dy > 10) {
           this.curControl.style.position.h = parseInt(this.resizeItem.h) + parseInt(dy);
         }
         //canvas组件需要重新渲染
@@ -486,7 +486,7 @@ export default {
           // DOM 更新了
           var a = this.$refs["comp" + this.curIndex][0];
           a.onResize();
-          console.log("nextTick");
+         
         });
       } else if (this.flag == "move") {
         //移动组件
@@ -652,14 +652,11 @@ export default {
       return true;
     },
     parseView(component) {
-    
       return topoUtil.parseViewName(component);
     },
     clickItem(component, index) {
       this.setLayerSelected(false);
-    
-
-      console.log(component);
+      // console.log(component);
       if (this.selectedComponentMap[component.identifier] == undefined) {
         component.dataBind.biz = component.name;
         this.setSelectedComponent(component); //重新渲染1
@@ -879,16 +876,18 @@ export default {
 .topo-main {
   background-color: white;
   border: #ccc solid 1px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  margin: 0;
+  // position: relative;
+  // overflow-x: hidden;
+  // overflow-y: hidden;
 
   .topo-layer {
     width: 100%;
     height: 100%;
-    position: absolute;
+    // position: absolute;
     transform-origin: left top;
-    overflow: auto;
+    // overflow: auto;
+    // overflow: hidden;
     // background-color: white;
     // background-clip: padding-box;
     // background-origin: padding-box;
@@ -1056,5 +1055,6 @@ export default {
     height: 178px;
     display: block;
   }
+  .Guide{ position: absolute; z-index: 0;}
 }
 </style>

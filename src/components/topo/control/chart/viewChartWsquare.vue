@@ -14,14 +14,17 @@ export default {
   extends: BaseView,
   props: {},
   watch: {
-    detail: function (newVal) {
-      this.setOption(this.option);
+    detail:{
+      handler(newValue,oldValue){
+		  this.setOption(this.option);
+		},
+    deep:true
     },
   },
   data() {
     return {
       echart: null,
-      num: 0.2,
+      num: 0.5,
       option: {
         series: [
           {
@@ -36,9 +39,9 @@ export default {
             },
             data: [0.5, 0.5, 0.5], // data个数代表波浪数
             amplitude: 10,
-            // animationDuration: 1000,
-            // animationDurationUpdate: 1000,
-            // animationDelay: 1000,
+            animationDuration: 1000,
+            animationDurationUpdate: 1000,
+            animationDelay: 1000,
             backgroundStyle: {
               borderWidth: 0,
               color: "none",
@@ -68,11 +71,7 @@ export default {
       },
     };
   },
-  watch: {
-    detail: function (newVal) {
-      this.setOption(this.option);
-    },
-  },
+ 
   methods: {
     setOption(option) {
       if (this.echart) {
@@ -82,30 +81,19 @@ export default {
       this.echart = echarts.init(view);
       this.echart.setOption(option);
     },
-    onResize() {
-      if (this.echart) {
-        this.conductShape();
-        // console.log(this.option.series[0].shape);
-        this.setOption(this.option);
-        this.echart.resize();
-      }
-    },
+    // onResize() {
+    //   if (this.echart) {
+    //     this.conductShape();
+    //     this.setOption(this.option);
+    //     this.echart.resize();
+    //   }
+    // },
     updateView() {
       this.setOption(this.option);
     },
     conductShape() {
       let w = this.detail.style.position.w;
       let h = this.detail.style.position.h;
-      // if (w > h) {
-      //   console.log('w > h');
-      //     this.option.series[0].radius = (w / h) * 100 + "%";
-    
-      // } else {
-      //   this.option.series[0].radius = (h / w) * 100 + "%";
-       
-      // }
-      // console.log(this.detail.style.backColor);
-      // this.option.series[0].backgroundStyle.color = this.detail.style.backColor
       this.option.series[0].data = [this.num, this.num, this.num];
        this.option.series[0].label.normal.position = [
         "50%",
@@ -113,14 +101,10 @@ export default {
       ];
       this.option.series[0].label.normal.formatter =
         (this.num * 100).toFixed(1) + "%";
-      // this.option.series[0].shape = `path://M 0 0 L ${w} 0 L ${w} ${h} L 0 ${h} Z`;
     },
   },
   mounted() {
-
-
     this.conductShape();
-
     this.setOption(this.option);
   },
 };

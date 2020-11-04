@@ -6,6 +6,7 @@
   "cordovaId": "phynos",
   "author": "phynos",
   "private": true,
+  
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "dev": "quasar dev",

@@ -21,7 +21,7 @@
                         "x": 100,
                         "y": 100,
                         "w": 300,
-                        "h": 20
+                        "h": 10
                     },
                     "backColor": "transparent",
                     "foreColor": "rgb(115,222,69)",

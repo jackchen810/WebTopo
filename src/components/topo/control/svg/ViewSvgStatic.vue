@@ -20,7 +20,7 @@ export default {
             var that = this;
             this.$axios.get(this.svgURL)
             .then(function (response) {
-                console.log(response);                
+                            
                 that.svgContent = response.data;
             })
             .catch(function (error) {

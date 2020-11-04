@@ -4,7 +4,7 @@
     "opened": false,
     "items": [
         {
-            "text": "Text",
+            "text": "文本",
             "icon": "text_fields",
             "isFontIcon": true,
             "info": {
@@ -37,7 +37,7 @@
             }
         },
         {
-            "text": "Image",
+            "text": "图片",
             "icon": "photo_size_select_actual",
             "isFontIcon": true,
             "info": {
@@ -64,7 +64,7 @@
             }
         },
         {
-            "text": "Triangle",
+            "text": "三角",
             "icon": "change_history",
             "isFontIcon": true,
             "info": {
@@ -91,7 +91,7 @@
             }
         },
         {
-            "text": "Rect",
+            "text": "矩形",
             "icon": "stop",
             "isFontIcon": true,
             "info": {
@@ -119,7 +119,7 @@
             }
         },
         {
-            "text": "Circular",
+            "text": "圆",
             "icon": "fiber_manual_record",
             "isFontIcon": true,
             "info": {
@@ -146,7 +146,7 @@
             }
         },
         {
-            "text": "Line",
+            "text": "线条",
             "icon": "remove",
             "isFontIcon": true,
             "info": {

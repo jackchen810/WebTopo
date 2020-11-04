@@ -229,6 +229,7 @@ export default {
   background-size: 100% 100%;
   position: relative;
   height: 100%;
+  overflow: hidden;
 
   .topo-render-wrapper {
     position: absolute;
@@ -237,6 +238,7 @@ export default {
   .topo-render-wrapper-clickable {
     cursor: pointer;
   }
+ 
 }
 </style>
 
