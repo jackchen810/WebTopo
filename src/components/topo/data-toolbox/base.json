@@ -223,6 +223,35 @@
                 }
             }
         }
+        ,
+        {
+            "text": "天气",
+            "icon": "remove",
+            "isFontIcon": true,
+            "info": {
+                "type": "web-weather",
+                "action": [],
+                "dataBind": {
+                    "sn": "",
+                    "title": "",
+                    "biz": "",
+                    "queryParam": {}
+                },
+                "style": {
+                    "position": {
+                        "x": 100,
+                        "y": 100,
+                        "w": 450,
+                        "h": 150
+                    },
+                    "backColor": "transparent",
+                    "foreColor": "grey",
+                    "zIndex": 1,
+                    "transform": 0,
+                    "lineWidth": 2
+                }
+            }
+        }
        
 
         

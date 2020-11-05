@@ -18,6 +18,7 @@ topoUtil.viewRegisterMap = {
   "chart-wsquare": "view-chart-wsquare",
   "buttom":"view-buttom",
   "web-record": "view-web-record",
+  "weather": "view-weather",
 };
 
 //优先匹配map，否则将自动匹配

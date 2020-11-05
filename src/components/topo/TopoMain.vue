@@ -592,10 +592,14 @@ export default {
     onDrop(event) {
       event.preventDefault();
       var infoJson = event.dataTransfer.getData("my-info");
-      var component = JSON.parse(infoJson);
+ 
+      if(infoJson != null){
+         var component = JSON.parse(infoJson);
       component.position = {
         dataLine: this.dataLine,
       };
+      }
+     
 
       if (this.checkAddComponent(component) == false) {
         return;

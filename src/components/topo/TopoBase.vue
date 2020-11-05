@@ -21,8 +21,8 @@ import viewChartwatera from './control/chart/viewChartwatera';
 import viewChartWsquare from './control/chart/viewChartWsquare';
 import ViewChartPie from './control/chart/ViewChartPie';
 
+import ViewWebWeather from './control/web/Weather';
 import ViewWebRecord from './control/web/Record';
-
 
 import ViewSvgImage from './control/svg/ViewSvgImage';
 import ViewSvgStatic from './control/svg/ViewSvgStatic';
@@ -50,6 +50,7 @@ export default {
         ViewCanvasLines,
         ViewWebRecord,
         viewChartWsquare,
+        ViewWebWeather,
     },
 }
 </script>
