@@ -542,7 +542,6 @@ export default {
         }
          console.log('this.layerWHTemp'+this.layerWHTemp);
         if (this.layerWHTemp == "") {
-         
           var wh = this.topoData.layer.width + "x" + this.topoData.layer.height;
           if (this.whOptions.indexOf(wh, 0) == -1) {
             this.layerWHTemp = "custom";

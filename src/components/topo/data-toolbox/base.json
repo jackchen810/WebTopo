@@ -226,7 +226,7 @@
         ,
         {
             "text": "天气",
-            "icon": "remove",
+            "icon": "cloud",
             "isFontIcon": true,
             "info": {
                 "type": "web-weather",
@@ -243,6 +243,35 @@
                         "y": 100,
                         "w": 450,
                         "h": 150
+                    },
+                    "backColor": "transparent",
+                    "foreColor": "grey",
+                    "zIndex": 1,
+                    "transform": 0,
+                    "lineWidth": 2
+                }
+            }
+        }
+        ,
+        {
+            "text": "时间",
+            "icon": "access_time",
+            "isFontIcon": true,
+            "info": {
+                "type": "web-dtime",
+                "action": [],
+                "dataBind": {
+                    "sn": "",
+                    "title": "",
+                    "biz": "",
+                    "queryParam": {}
+                },
+                "style": {
+                    "position": {
+                        "x": 100,
+                        "y": 100,
+                        "w": 182,
+                        "h": 37
                     },
                     "backColor": "transparent",
                     "foreColor": "grey",

@@ -23,6 +23,7 @@ import ViewChartPie from './control/chart/ViewChartPie';
 
 import ViewWebWeather from './control/web/Weather';
 import ViewWebRecord from './control/web/Record';
+import ViewWebDtime from './control/web/Dtime';
 
 import ViewSvgImage from './control/svg/ViewSvgImage';
 import ViewSvgStatic from './control/svg/ViewSvgStatic';
@@ -51,6 +52,7 @@ export default {
         ViewWebRecord,
         viewChartWsquare,
         ViewWebWeather,
+        ViewWebDtime
     },
 }
 </script>
