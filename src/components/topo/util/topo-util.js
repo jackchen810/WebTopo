@@ -8,7 +8,7 @@ topoUtil.viewRegisterMap = {
   "line": "view-line",
   "line-arrow": "view-line-arrow",
   "chart-line": "view-chart",
-  "chart-lines": "view-chart-lines",
+ 
   "canvas-lines": "view-canvas-lines",
   "chart-line-step": "view-chart",
   "chart-bar": "view-chart",

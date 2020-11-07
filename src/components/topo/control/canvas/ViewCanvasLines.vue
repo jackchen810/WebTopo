@@ -1,7 +1,7 @@
 <template>
   <div class="viewcanvaslines">
     <canvas
-    
+
       ref="elCanvas"
       :width="detail.style.position.w"
       :height="detail.style.position.h"

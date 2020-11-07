@@ -16,7 +16,7 @@ import ViewTriangle from './control/canvas/ViewTriangle';
 
 import ViewChart from './control/chart/ViewChart';
 import ViewChartGauge from './control/chart/ViewChartGauge';
-import ViewChartLines from './control/chart/ViewChartLines';
+// import ViewChartLines from './control/chart/ViewChartLines';
 import viewChartwatera from './control/chart/viewChartwatera';
 import viewChartWsquare from './control/chart/viewChartWsquare';
 import ViewChartPie from './control/chart/ViewChartPie';
@@ -42,7 +42,7 @@ export default {
         ViewRect,
         ViewTriangle,
         ViewChart,
-        ViewChartLines,
+      
         ViewChartPie,
         ViewChartGauge,
         ViewSvgImage,
