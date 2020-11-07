@@ -55,7 +55,7 @@
           <q-list separator no-border>
             <q-expansion-item label="定位" default-opened>
               <table>
-                <tr>
+                <!-- <tr>
                   <td width="50%">X轴</td>
                   <td width="50%">
                     <q-input
@@ -76,9 +76,9 @@
                       style="padding-right: 5px"
                     />
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
-                  <td>宽</td>
+                  <td width="50%">宽</td>
                   <td>
                     <q-input
                       type="number"
@@ -125,7 +125,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>边线颜色</td>
+                  <td :style = "{'background':configObject.style.borderColor}">边线颜色</td>
                   <td>
                     <q-input
                       filled
@@ -181,12 +181,13 @@
                     />
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>元素背景色</td>
-                  <td>
+                  <td  :style = "{'background':configObject.style.backColor}">
                     <q-input
                       filled
                       v-model="configObject.style.backColor"
+                     
                       class="my-input"
                     >
                       <template v-slot:append>
@@ -195,14 +196,13 @@
                             transition-show="scale"
                             transition-hide="scale"
                           >
-
                             <q-color v-model="configObject.style.backColor" format-model="rgba"  />
                           </q-popup-proxy>
                         </q-icon>
                       </template>
                     </q-input>
                   </td>
-                </tr>
+                </tr> -->
                 <tr
                   v-if="
                     configObject.style.url != undefined &&
@@ -231,7 +231,7 @@
                 </tr>
                 <tr>
                   <td>颜色</td>
-                  <td>
+                  <td :style = "{'background':configObject.style.foreColor}">
                     <q-input
                       filled
                       v-model="configObject.style.foreColor"
@@ -444,7 +444,7 @@
       <table style="margin-top: 10px">
         <tr>
           <td width="40%">背景色</td>
-          <td>
+          <td :style = "{'background':topoData.layer.backColor}">
             <q-input filled v-model="topoData.layer.backColor" class="my-input">
               <template v-slot:append>
                 <q-icon name="colorize" class="cursor-pointer">

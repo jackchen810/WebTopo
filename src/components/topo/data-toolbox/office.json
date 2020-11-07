@@ -507,6 +507,31 @@
                 "url": "statics/topo/svg/zhiwu1.svg"
             }
         }
+    },
+    {
+        "text": "",
+        "icon": "statics/topo/svg/ren.svg",
+        "info": {
+            "type": "image",
+            "action": [],
+            "dataBind": {
+                "sn": "",
+                "title": "",
+                "biz": "",
+                "queryParam": {}
+            },
+            "style": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 142,
+                    "h": 112
+                },
+                "backColor": "transparent",
+                "zIndex": 1,
+                "url": "statics/topo/svg/ren.svg"
+            }
+        }
     }
 
 
