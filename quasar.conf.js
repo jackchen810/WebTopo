@@ -21,7 +21,8 @@ module.exports = function (ctx) {
       'config'
     ],
     css: [
-      'app.styl'
+      'app.styl',
+      'animate.css'
     ],
     extras: [
       'material-icons', // optional, you are not bound to it
@@ -47,7 +48,7 @@ module.exports = function (ctx) {
       extendWebpack (cfg) {
         cfg.resolve.alias = {
           ...cfg.resolve.alias,
-          '@': rootPath('src')
+          '@': rootPath('/src')
         }
       }
     },

@@ -6,9 +6,7 @@
         :key="index"
         @click="doClickComponent(component)"
         @dblclick="doDbClickComponent(component)"
-        :class="{
-          'topo-render-wrapper-clickable': component.action.length > 0,
-        }"
+         :class="component.style.animate"
         v-show="
           component.style.visible == true ? true : component.style.visible.value
         "
@@ -22,6 +20,7 @@
           borderWidth: component.style.borderWidth + 'px',
           borderStyle: component.style.borderStyle,
           borderColor: component.style.borderColor,
+          'animation-duration': component.style.animationDuration,
           transform: component.style.transform
             ? `rotate(${component.style.transform}deg)`
             : 'rotate(0deg)',

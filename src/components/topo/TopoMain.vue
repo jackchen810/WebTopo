@@ -7,9 +7,9 @@
     >
 
       <div
-       class="topo-layer"  
+       class="topo-layer "  
         tabindex="0"
-       :class="{ 'topo-layer-view-selected': selectedIsLayer }" id="surface-edit-layer"
+       :class="{ 'topo-layer-view-selected': selectedIsLayer}" id="surface-edit-layer"
          @click="onLayerClick($event)"
          :style="layerStyle"
         @dragover.prevent
@@ -23,17 +23,19 @@
         @keydown.ctrl.90.stop="undo"
         @keydown.ctrl.89.stop="redo"
       >
+       <!-- :class="{
+              'topo-layer-view-selected':selectedComponentMap[component.identifier] == undefined
+                  ? false
+                  : true
+            }
+            " -->
         <template v-for="(component, index) in configData.components">
           <div
             :key="component.identifier"
             tabindex="0"
             class="topo-layer-view"
-            :class="{
-              'topo-layer-view-selected':
-                selectedComponentMap[component.identifier] == undefined
-                  ? false
-                  : true,
-            }"
+           :class="component.style.animate"
+           
             @click.stop="clickComponent(index, component, $event)"
             @mousedown.stop="controlMousedown(component, $event, index)"
             @keyup.delete="removeItem()"
@@ -55,6 +57,7 @@
               borderWidth: component.style.borderWidth + 'px',
               borderStyle: component.style.borderStyle,
               borderColor: component.style.borderColor,
+              'animation-duration': component.style.animationDuration,
               transform: component.style.transform
                 ? `rotate(${component.style.transform}deg)`
                 : 'rotate(0deg)',
@@ -372,9 +375,9 @@ export default {
     };
   },
   watch: {
-          'topoData': function(newVal){
+        'configData': function(newVal){
             // console.log('边了');
-          },
+        },
           
       },
   methods: {
@@ -484,6 +487,7 @@ export default {
         // DOM 还没有更新
         this.$nextTick(function () {
           // DOM 更新了
+        
           var a = this.$refs["comp" + this.curIndex][0];
           a.onResize();
          
@@ -868,6 +872,7 @@ export default {
     }
   },
   mounted() {
+   
     this.usershownamelist();
     this.draglistid();
     this.isname = this.topoDatademo;

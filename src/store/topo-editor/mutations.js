@@ -28,7 +28,6 @@ export const execute = function(state,command) {
             //component.style.fontFamily = "Arial";
             state.topoData.components.push(component); 
     
-               
             break;
         case 'del':
             console.log(command.index);

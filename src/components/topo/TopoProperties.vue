@@ -149,7 +149,7 @@
             </q-expansion-item>
             <q-expansion-item label="基础" default-opened>
               <table>
-                <tr>
+                <!-- <tr>
                   <td width="50%">可见</td>
                   <td width="50%">
                     <q-select
@@ -160,7 +160,7 @@
                       ]"
                     />
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td>层级</td>
                   <td>
@@ -429,13 +429,17 @@
               </div>
             </template>
             <div style="width: 100%; padding: 10px 10px 10px 10px">
-              <q-btn
+              <!-- <q-btn
                 label="Add"
                 outline
                 @click="addAction"
                 style="width: 100%"
-              />
+              /> -->
+              <div>
+                <Anima @addAnima = "addAnima"  @tooltip = 'tooltip'   :anTooltip = configObject.style.animationDuration></Anima>
+              </div>
             </div>
+            
           </template>
         </div>
       </div>
@@ -494,10 +498,12 @@
 <script>
 import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 import FacilityBind from './FacilityBind'
+import Anima from './anima'
 export default {
   name: "TopoProperties",
   components:{
-    FacilityBind
+    FacilityBind,
+    Anima
   },
   data() {
     return {
@@ -593,18 +599,14 @@ export default {
       
     },
     'configObject.style.radius': function(){
-     
-        let h = this.configObject.style.position.h/2
+      if(this.configObject != null){
+          let h = this.configObject.style.position.h/2
         let w = this.configObject.style.position.w/2
         let r = this.configObject.style.radius
         if( r >= w || r >= h){
-            if(w > h){
-              this.configObject.style.radius = h
-            }else{
-              this.configObject.style.radius = w
-            }
+           this.configObject.style.radius = w > h ? h : w
         }
-        
+      }
     },
     Projectnametlist: function () {
       this.configObjectName = this.Projectnametlist;
@@ -686,8 +688,17 @@ export default {
         showItems: [],
         hideItems: [],
       };
+     
       this.configObject.action.push(action);
     },
+    // 载入动画
+     addAnima(name){
+        this.configObject.style.animate = 'animated '+ name[0] +' '+name[1]
+      },
+     tooltip(val){
+        this.configObject.style.animationDuration = val+'s'
+     
+     },
     changetopoData() {
       console.log(this.topoData);
       this.topoData.name = this.topoDataname;
