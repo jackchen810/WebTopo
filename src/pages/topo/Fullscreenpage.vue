@@ -1,5 +1,5 @@
 <template>
-  <div class="topo-fullscreen">
+  <div class="topo-fullscreen" >
     <TopoRenderpage v-if="!prompt" :configData = "configData"  :facilityData="facilityData" :deviceList = "deviceList"  />
     <q-dialog v-model="prompt" persistent>
       <q-card style="min-width: 350px">
@@ -47,7 +47,7 @@ export default {
   },
   watch: {
     prompt() {
-      this.getidData();
+    this.getidData();
      this.getFacilityDevunit();
       
     },
@@ -61,10 +61,11 @@ export default {
       newdeviceList: [],
       component: [],
       prompt: true,
-      username: "",
-      password: "",
+      username: "text",
+      password: "123",
       showerr: "",
       configData: "",
+       loading: true
     };
   },
   methods: {
@@ -80,6 +81,7 @@ export default {
           user_password: this.getmd5(this.password),
         })
         .then((res) => {
+        
           if (res.data.ret_code === 0) {
          
             this.username = this.username;
@@ -119,11 +121,12 @@ export default {
           id: that.$route.query.id,
         })
         .then((res) => {
-          console.log(res);
+
           if ( res.data.extra[0].project_showname == this.username){
             that.temp = res.data.extra[0].dargjsondata;
-            localStorage.getItem("topoData", JSON.parse(this.temp));
+            // localStorage.getItem("topoData", JSON.parse(this.temp));
             this.configData = JSON.parse(res.data.extra[0].dargjsondata);
+           
           }
           else{
             this.$message({
@@ -136,10 +139,8 @@ export default {
   },
 
   mounted() {
-  
+      this.clicklogin()
       let that = this;
-      
-      
     setInterval(function () {
         that.getFacilityDevunit(that.temp.name);
       }, 60000);

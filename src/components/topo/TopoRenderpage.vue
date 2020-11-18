@@ -38,7 +38,6 @@
 
 <script>
 import TopoBase from "./TopoBase";
-
 import topoUtil from "./util/topo-util";
 import { mapActions, mapGetters, mapState, mapMutations } from "vuex";
 export default {
@@ -102,7 +101,6 @@ export default {
                        item.detail.style.text =  (parseInt(itemdata.varValue) * (1+Math.floor(Math.random()*10)/1000)).toFixed(2);
                      }
                   }, 1000);
-                  // Math.ceil(Math.random()*10)
                 }
               });
             }
@@ -115,14 +113,11 @@ export default {
             item.buttomdata.url = item.detail.style.text == true ? "statics/topo/svg/on1.svg" : "statics/topo/svg/off1.svg";
           }  
         });
-       
-        // localStorage.setItem('topoData',this.configData )
       });
     },
   },
   data() {
     return {
-    
       buttomdata: {
         isclick: true,
         identifier: "",
@@ -134,30 +129,20 @@ export default {
     };
   },
   methods: {
-    ...mapMutations("topoEditor", ["buttomupdata"]),
     parseView(component) {
       return topoUtil.parseViewName(component);
     },
     doClickComponent(component) {
       if (component.type == "buttom") {
-        console.log("buttom");
-        console.log(component);
         this.$refs.spirit.map((item) => {
           if (item.detail.name == component.name) {
             if(item.detail.style.text == undefined){
                 this.$message.error('设备未绑定')
             }
-           console.log( item.buttomdata.isclick);
            item.buttomdata.isclick =  item.buttomdata.isclick == true ? false : true;
-           console.log( item.buttomdata.isclick);
             item.buttomdata.url = item.buttomdata.isclick == true ? "statics/topo/svg/on1.svg" : "statics/topo/svg/off1.svg";
-            console.log(item.buttomdata.url );
           }
         });
-
-        localStorage.getItem("topoData", this.configData);
-        // this.buttomupdata(this.buttomdata)
-        // this.buttomdata.isclick = !(component.style.text)
       }
       for (var i = 0; i < component.action.length; i++) {
         var action = component.action[i];
@@ -207,16 +192,11 @@ export default {
      
   },
   created(){
-    // this.configData = JSON.parse(localStorage.getItem("topoData"));
-    // console.log(this.configData);
+
   },
   mounted() {
-    //这里只是纯前端项目，实际应该从后台拿取数据
-    // console.log(this.$route.query.id)
-    // this.$nextTick(()=>{
-    //    this.configData = JSON.parse(localStorage.getItem("topoData"));
-    // })
-      console.log(this.configData);
+
+     
     
     
   },

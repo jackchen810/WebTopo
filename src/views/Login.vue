@@ -1,54 +1,58 @@
 <template>
   <div class="login-wrap">
+     <div class="centerBox">
      <div class="loginstyle">
-    <div class="q-pa-md">
-     
         <div class="text-h4">
-          金大万翔物联网管理平台
-          <q-badge align="top">cli v1.0.0</q-badge>
+              金大万翔物联网管理平台
+              <q-badge align="top">cli v1.0.0</q-badge>
         </div>
-        <div class="q-gutter-md qlogin">
-          <q-form @submit="submitForm">
-            <q-input
-              filled
-              v-model="ruleForm.username"
-              label="用户名"
-              hint="必填"
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || '请输入用户名']"
-            />
-            <q-input
-              filled
-              type="password"
-              v-model="ruleForm.password"
-              label="密码"
-              hint="必填"
-              lazy-rules
-              :rules="[(val) => (val !== null && val !== '') || '请输入密码']"
-            />
+        <div class="q-pa-md">
+        
+           
+            <div class="q-gutter-md qlogin">
+              <q-form @submit="submitForm">
+                <q-input
+                  filled
+                  v-model="ruleForm.username"
+                  label="用户名"
+                  hint="必填"
+                  lazy-rules
+                  :rules="[(val) => (val && val.length > 0) || '请输入用户名']"
+                />
+                <q-input
+                  filled
+                  type="password"
+                  v-model="ruleForm.password"
+                  label="密码"
+                  hint="必填"
+                  lazy-rules
+                  :rules="[(val) => (val !== null && val !== '') || '请输入密码']"
+                />
 
-            <div style="padding: 20px">
-              <q-btn
-                label="登录"
-                type="submit"
-                color="primary"
-                style="width: 240px"
-              />
+                <div style="padding: 20px">
+                  <q-btn
+                    label="登录"
+                    type="submit"
+                    color="primary"
+                    style="width: 240px"
+                  />
+                </div>
+              </q-form>
             </div>
-          </q-form>
-        </div>
-        <div class="login-icp">
-          <el-link
-            href="http://www.beian.miit.gov.cn"
-            type="primary"
-            target="_blank"
-            >京ICP备15044078号-1</el-link
-          >
-          <br />
-          <el-link type="primary" disabled
-            >2018-2020 北京金大万翔环保科技有限公司 版权所有</el-link
-          >
-        </div>
+           
+          </div>
+           <div class="login-icp">
+              <el-link
+                href="http://www.beian.miit.gov.cn"
+                type="primary"
+                target="_blank"
+                >京ICP备15044078号-1</el-link
+              >
+              <br />
+              <el-link type="primary" disabled
+                >2018-2020 北京金大万翔环保科技有限公司 版权所有</el-link
+              >
+            </div>
       </div>
     </div>
     <!-- <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
@@ -243,27 +247,36 @@ export default {
 </script>
 
 <style scoped>
-
-.loginstyle {
-  width: 600px;
-  position:absolute;
-  height:600px;
-  top:50%;
- left: 50%;
-  margin: -200px 0 0 -250px;
+.centerBox{
+    width: 100%;
+    height: 400px;
+    background: url('../statics/img/bg.png') center center no-repeat content-box #08437b;
+    background-size: 60%;
+    position:absolute;
+    top:50%;
+    margin: -250px 0 0 0;
 }
-.qlogin{ margin: 0 auto;}
+.loginstyle {
+  position: relative;
+  height: 400px;
+}
+.qlogin{ margin: 0 auto;
+width: 320px;
+padding: 5px 20px 5px 5px;}
 .q-gutter-md {
-  width: 300px;
 
-  /* margin: -150px 0 0 -150px; */
-
+  margin: 50px 0 0 150px;
   box-sizing: border-box;
   border-radius: 5px;
   background: #fff;
+  position: fixed;
+  left: 50%;
 }
 .text-h4 {
   text-align: center;
+  position: absolute;
+  left: 50px;
+  top:-50px;
   padding: 0px 20px 20px;
 }
 .login-btn {
@@ -277,5 +290,9 @@ export default {
 .login-icp {
   text-align: center;
   color: #fff;
+  position: absolute;
+  bottom: -150px;
+  width: 100%;
 }
+
 </style>

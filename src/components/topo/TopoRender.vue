@@ -211,10 +211,9 @@ export default {
   },
   mounted() {
     //这里只是纯前端项目，实际应该从后台拿取数据
-    // console.log(this.$route.query.id)
-  
-      this.configData = JSON.parse(localStorage.getItem("topoData"));
-    
+   
+   
+    this.configData = JSON.parse(localStorage.getItem("topoData"));
     console.log(this.configData);
   },
 };

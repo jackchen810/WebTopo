@@ -24,9 +24,14 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">清空</el-button>
+        <el-button type="primary" @click="onSubmit">取消绑定</el-button>
+
       </el-form-item>
+      
+        
+     
     </el-form>
+     <span class="spanstyle">保存请点页面正下方按钮《保存数据》</span>
   </div>
 </template>
 <script>
@@ -156,3 +161,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .spanstyle{
+    color: #666;
+    display: block;
+    font-size: 12px;
+  }
+</style>

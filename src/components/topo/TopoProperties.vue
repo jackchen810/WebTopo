@@ -60,7 +60,7 @@
                   <td width="50%">
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       v-model.lazy="configObject.style.position.x"
                       style="padding-right: 5px"
                     />
@@ -71,7 +71,7 @@
                   <td>
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       v-model.lazy="configObject.style.position.y"
                       style="padding-right: 5px"
                     />
@@ -82,7 +82,7 @@
                   <td>
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       v-model.lazy="configObject.style.position.w"
                       style="padding-right: 5px"
                     />
@@ -93,7 +93,7 @@
                   <td>
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       v-model.lazy="configObject.style.position.h"
                       style="padding-right: 5px"
                     />
@@ -109,7 +109,7 @@
                   <td width="50%">
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       style="padding-right: 5px"
                       v-model.lazy="configObject.style.borderWidth"
                     />
@@ -119,7 +119,7 @@
                   <td>边线样式</td>
                   <td>
                     <q-select
-                      v-model="configObject.style.borderStyle"
+                      v-model="configObjectstyleborderStyle"
                       :options="borderStyleOptions"
                     />
                   </td>
@@ -162,7 +162,7 @@
                   </td>
                 </tr> -->
                 <tr>
-                  <td>层级</td>
+                  <td width="50%">层级</td>
                   <td>
                     <q-input
                       type="number"
@@ -269,7 +269,7 @@
                   <td>
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       style="padding-right: 5px"
                       v-model.lazy="configObject.style.fontSize"
                     />
@@ -289,7 +289,7 @@
                   <td>
                     <q-input
                       type="number"
-                      suffix="px"
+                      suffix="像素"
                       style="padding-right: 5px"
                       v-model.lazy="configObject.style.lineWidth"
                     />
@@ -517,7 +517,14 @@ export default {
         "微软雅黑",
       ],
       textAlignOptions: ["left", "right", "center", "justify"],
-      borderStyleOptions: ["solid", "dashed", "dotted"],
+      configObjectstyleborderStyle:'',
+      borderStyleOptions: ["实线", "虚线", "点线"],
+      borderStyleOptionsTransform:{
+        solid:'实线',
+        dashed:'虚线',
+        dotted:'点线',
+      },
+      
       axiosUrlStyleOptions: ["固定数据", "服务器数据", "http3"],
       whOptions: [
         "1024x768",
@@ -593,7 +600,8 @@ export default {
       configObject: function () {
       // console.log(this.configObject.type);
       if(this.configObject){
-        console.log(this.configObject);
+        //  console.log('this.configObject.style.borderStyle',this.configObject.style.borderStyle);
+          this.configObjectstyleborderStyle = this.borderStyleOptionsTransform[this.configObject.style.borderStyle]
         this.factype = this.configObject
       }
       
@@ -611,6 +619,10 @@ export default {
     Projectnametlist: function () {
       this.configObjectName = this.Projectnametlist;
     },
+    configObjectstyleborderStyle: function(){
+      
+      this.configObject.style.borderStyle = Object.getOwnPropertyNames(this.borderStyleOptionsTransform)[this.borderStyleOptions.indexOf(this.configObjectstyleborderStyle)]
+    }
   },
   methods: {
     ...mapMutations("topoEditor", [
@@ -719,8 +731,9 @@ export default {
     }
   },
   mounted() {
-    console.log(this.Projectnametlist);
- 
+   
+    
+    
     this.configObjectName = this.Projectnametlist;
     if (!this.$route.query.id) {
       this.topoDataname = "图层";

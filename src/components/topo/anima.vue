@@ -20,6 +20,19 @@
     <a
       href="javascript:;"
       class="editAnimateImg"
+      @click="animaMethod(' ')"
+    >
+      <div class="editAnimateIco">
+        <img
+          src="@/statics/topo/anima/timg.jpg"
+          class="mCS_img_loaded"
+        />
+      </div>
+      <div class="editAnimateTxt">暂停</div>
+    </a>
+	<a
+      href="javascript:;"
+      class="editAnimateImg"
       @click="animaMethod('lightSpeedIn')"
     >
       <div class="editAnimateIco">

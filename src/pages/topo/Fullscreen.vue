@@ -46,21 +46,46 @@ export default {
         
     });
                
-  }
+  },
+  async getidData() {
+      let that = this;
+      await this.$axios
+        .post("/api/drag/listid", {
+          id: that.$route.query.id,
+        })
+        .then((res) => {
+          console.log(res);
+          if ( res.data.extra[0].user_account == localStorage.getItem("user_account")){
+            let temp = res.data.extra[0].dargjsondata;
+            localStorage.setItem("topoData",temp);
+            that.configData = JSON.parse(res.data.extra[0].dargjsondata);
+          }
+          else{
+            this.$message({
+              message: "无权限",
+              type: "warning",
+            });
+          }
+        });
+    },
   },
   async created() {
     this.component = JSON.parse(localStorage.getItem("topoData")).components
     await this.getFacilityDevunit();
   },
   mounted() {
+     if(this.$route.query.id){
+      
+        this.getidData()
+    }
       let that = this
-  
        that.getFacilityDevunit()
       setInterval(function()  {
           that.getFacilityDevunit()
       },60000)
   
   },
+
 };
 </script>
 

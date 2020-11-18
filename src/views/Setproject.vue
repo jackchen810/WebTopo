@@ -52,6 +52,9 @@ export default {
     this.form.name = this.componentdataVal.projectname;
     this.form.region = this.componentdataVal.project_showname;
     console.log(this.componentdataVal);
+    
+	
+	
   },
   methods: {
     onSubmit() {
@@ -68,7 +71,6 @@ export default {
           });
           this.$emit("closedialog");
         } else {
-          this.$message.error("提交失败");
         }
       });
     },
